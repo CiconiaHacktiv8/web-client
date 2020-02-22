@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
+import store from '../store'
 
 Vue.use(VueRouter)
 
@@ -21,8 +22,30 @@ const routes = [
       },
       {
         path: 'cart',
-        name: 'Cart',
-        component: () => import(/* webpackChunkName: "cart" */ '../views/Cart.vue')
+        // name: 'Cart',
+        component: () => import(/* webpackChunkName: "cart" */ '../views/Cart.vue'),
+        children: [
+          {
+            path: '',
+            name: 'Open',
+            component: () => import(/* webpackChunkName: "open" */ '../views/carts/CartOpen.vue')
+          },
+          {
+            path: 'offered',
+            name: 'Offered',
+            component: () => import(/* webpackChunkName: "offered" */ '../views/carts/CartOffered.vue')
+          },
+          {
+            path: 'pendingpurchase',
+            name: 'Purchase',
+            component: () => import(/* webpackChunkName: "purchase" */ '../views/carts/CartPurchase.vue')
+          },
+          {
+            path: 'confrimdelivery',
+            name: 'Delivery',
+            component: () => import(/* webpackChunkName: "delivery" */ '../views/carts/CartDelivery.vue')
+          }
+        ]
       },
       {
         path: 'additem',
@@ -66,6 +89,20 @@ const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes
+})
+
+router.beforeEach((to, from, next) => {
+  console.log(store.state)
+  // if (!store.state.isLogin) {
+  // if (to.matched.some(route => route.path === '')) {
+  //   console.log('STORE', store)
+  //   next('/login')
+  // } else {
+  //   next()
+  // }
+  // } else {
+  next()
+  // }
 })
 
 export default router

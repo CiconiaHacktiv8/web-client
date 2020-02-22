@@ -1,9 +1,11 @@
 <template>
-  <div>
-  <h1>TRAVEL LIST</h1>
-  <travel-list />
-  <h1>ITEM LIST</h1>
-  <item-list />
+  <div id="dashboard-custom">
+    <h1>TRAVEL LIST</h1>
+    <travel-list />
+    <div class="container">
+      <h1>ITEM LIST</h1>
+      <item-list />
+    </div>
   </div>
 </template>
 
@@ -15,10 +17,22 @@ export default {
   components: {
     ItemList,
     TravelList
+  },
+  methods: {
+    checkLogin () {
+      console.log('check login triggered')
+      if (localStorage.getItem('token')) {
+        this.$store.commit('LOGIN')
+      } else {
+        this.$router.push('/login')
+      }
+    }
+  },
+  created () {
+    this.checkLogin()
   }
 }
 </script>
 
-<style>
-
+<style lang="scss" scoped>
 </style>

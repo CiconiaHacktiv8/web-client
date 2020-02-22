@@ -1,6 +1,28 @@
 <template>
-  <div>
-    <h1>ITEM LIST</h1>
+  <div class="d-flex flex-wrap justify-content-center">
+    <item-card />
+    <item-card />
+    <item-card />
+    <item-card />
+    <item-card />
+    <item-card />
+    <item-card />
+    <item-card />
+    <item-card />
+    <item-card />
+    <item-card />
+    <item-card />
+    <item-card />
+    <item-card />
+    <item-card />
+    <item-card />
+    <item-card />
+    <item-card />
+    <item-card />
+    <item-card />
+    <item-card />
+    <item-card />
+    <item-card />
     <item-card />
     <item-card />
     <item-card />
@@ -20,5 +42,4 @@ export default {
 </script>
 
 <style>
-
 </style>

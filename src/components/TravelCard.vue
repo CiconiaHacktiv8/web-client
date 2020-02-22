@@ -1,13 +1,19 @@
 <template>
-  <h1>Travel Card</h1>
+  <div class="card" style="width: 18rem; display: inline-block; float: none; white-space: normal; margin: 5px">
+    <img src="https://picsum.photos/600/300/?image=25" class="card-img-top" alt="picsum" />
+    <div class="card-body">
+      <h5 class="card-title">Card title</h5>
+      <p
+        class="card-text"
+      >Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+      <router-link to="/travels/89e9qyjsdfia" class="btn btn-primary">View Detail</router-link>
+    </div>
+  </div>
 </template>
 
 <script>
-export default {
-
-}
+export default {}
 </script>
 
 <style>
-
 </style>

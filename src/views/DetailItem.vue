@@ -1,5 +1,22 @@
 <template>
-  <h1>DETAIL ITEM</h1>
+  <div class="container">
+    <div class="card" style="width: 100%">
+      <div class="row no-gutters">
+        <div class="col-md-6 d-flex align-items-center">
+          <img src="https://picsum.photos/600/300/?image=525" class="card-img img-fluid d-flex" alt="picsum">
+        </div>
+        <div class="col-md-6">
+          <div class="card-body">
+            <h5 class="card-title">Card title</h5>
+            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+            <a href="#" class="btn btn-primary mx-3">Offer Help</a>
+            <a href="#" class="btn btn-primary mx-3">Request</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
