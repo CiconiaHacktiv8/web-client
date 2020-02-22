@@ -9,7 +9,7 @@ const routes = [
   {
     path: '/landing',
     name: 'Landing',
-    component: () => import(/* webpackChunkName: "landing" */ '../views/Landing.vue')
+    component: () => import(/* webpackChunkName: "landing" */ '../views/Home.vue')
   },
   {
     path: '/',
@@ -51,6 +51,11 @@ const routes = [
         path: 'additem',
         name: 'AddItem',
         component: () => import(/* webpackChunkName: "additem" */ '../views/AddItem.vue')
+      },
+      {
+        path: 'addtravelitem',
+        name: 'AddTravelItem',
+        component: () => import(/* webpackChunkName: "addtravelitem" */ '../views/AddTravelItem.vue')
       },
       {
         path: 'addtravel',

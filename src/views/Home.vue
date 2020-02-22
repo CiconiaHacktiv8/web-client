@@ -16,6 +16,11 @@ export default {
     checkLogin () {
       if (localStorage.getItem('token')) {
         this.$store.commit('LOGIN')
+        this.$store.commit('SET_USER', {
+          name: localStorage.getItem('name'),
+          email: localStorage.getItem('email'),
+          point: localStorage.getItem('point')
+        })
         this.$store.dispatch('fetchItemList')
         this.$store.dispatch('fetchTravelList')
       } else {

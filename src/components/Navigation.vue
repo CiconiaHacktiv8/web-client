@@ -14,16 +14,17 @@
       </b-navbar-nav>
       <b-navbar-nav>
         <b-nav-item to="/cart">Cart</b-nav-item>
-        <b-nav-item @click="handleLogout">Logout</b-nav-item>
-        <b-nav-item to="/login">Login</b-nav-item>
+        <b-nav-item v-if="$store.state.isLogin" @click="handleLogout">Logout</b-nav-item>
+        <b-nav-item v-if="!$store.state.isLogin" to="/login">Login</b-nav-item>
       </b-navbar-nav>
-      <b-navbar-nav>
+      <b-navbar-nav v-if="$store.state.isLogin">
         <b-nav-item-dropdown right>
           <template v-slot:button-content>
             <b-button size="sm" class="my-2 my-sm-0" type="submit">Add</b-button>
           </template>
           <b-dropdown-item to="/addtravel">Travel</b-dropdown-item>
-          <b-dropdown-item to="/additem">Item</b-dropdown-item>
+          <b-dropdown-item to="/additem">Request</b-dropdown-item>
+          <b-dropdown-item to="/addtravelitem">Pre Order</b-dropdown-item>
         </b-nav-item-dropdown>
       </b-navbar-nav>
     </b-collapse>
@@ -37,6 +38,7 @@ export default {
     handleLogout () {
       localStorage.clear()
       this.$store.commit('LOGOUT')
+      this.$router.push('/login')
     }
   }
 }

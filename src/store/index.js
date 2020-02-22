@@ -6,15 +6,35 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    isLogin: true,
+    user: {
+      email: '',
+      point: 0,
+      name: ''
+    },
+    isLogin: false,
     isLoading: false,
     itemList: [],
     travelList: [],
-    itemDetail: {},
+    itemDetail: {
+      name: '',
+      price: 0,
+      quantity: 1,
+      image: '',
+      ownerId: {
+        email: '',
+        point: '',
+        name: ''
+      },
+      status: '',
+      location: ''
+    },
     travelDetail: {},
     userCart: {}
   },
   mutations: {
+    SET_USER (state, payload) {
+      state.user = payload
+    },
     LOGIN (state) {
       state.isLogin = true
     },
@@ -106,7 +126,6 @@ export default new Vuex.Store({
           url: `/travels/${payload}`
         })
           .then(({ data }) => {
-            console.log('sampai sini', data)
             context.commit('LOADING_FINISH')
             context.commit('FETCH_TRAVEL_DETAIL', data)
             resolve()

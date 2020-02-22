@@ -4,6 +4,9 @@
       <div class="text-center">
         <h2>Post Your Travel Detail</h2>
       </div>
+      <div v-for="(error, i) in errors" :key="i" class="alert alert-danger text-center" role="alert">
+        {{error}}
+      </div>
       <div class="form-group">
         <label for="inputDeparture">Depart from</label>
         <input
@@ -13,6 +16,7 @@
           aria-describedby="emailHelp"
           placeholder="Austin, TX"
           required
+          v-model="locationFrom"
         />
       </div>
       <div class="form-group">
@@ -23,6 +27,7 @@
           id="inputArrival"
           placeholder="Singapore, SG"
           required
+          v-model="locationTo"
         />
       </div>
       <div class="form-group">
@@ -37,6 +42,7 @@
 </template>
 
 <script>
+import axios from '../config/api'
 export default {
   name: 'AddTravel',
   data () {
@@ -45,12 +51,38 @@ export default {
     const minDate = new Date(today)
     return {
       date: '',
-      min: minDate
+      min: minDate,
+      errors: [],
+      locationFrom: '',
+      locationTo: ''
     }
   },
   methods: {
     handleSubmit () {
-      console.log('POST TRAVEL')
+      this.errors = []
+      axios({
+        method: 'POST',
+        url: '/travels',
+        data: {
+          locationFrom: this.locationFrom,
+          locationTo: this.locationTo,
+          departure: this.date
+        },
+        headers: {
+          token: localStorage.getItem('token')
+        }
+      })
+        .then(({ data }) => {
+          this.date = ''
+          this.locationFrom = ''
+          this.locationTo = ''
+          this.$store.dispatch('fetchItemList')
+          this.$store.dispatch('fetchTravelList')
+          this.$router.push('/')
+        })
+        .catch(err => {
+          this.errors = err.response.data.errors
+        })
     }
   }
 }

@@ -2,7 +2,7 @@
   <div class="container">
     <form @submit.prevent="handleSubmit">
       <div class="text-center">
-        <h2>Post Your Item Request</h2>
+        <h2>Post Your Item Pre-Order</h2>
       </div>
       <div v-for="(error, i) in errors" :key="i" class="alert alert-danger text-center" role="alert">
         {{error}}
@@ -79,7 +79,7 @@
 <script>
 import axios from '../config/api'
 export default {
-  name: 'AddItem',
+  name: 'AddTravelItem',
   data () {
     return {
       errors: [],
@@ -102,7 +102,7 @@ export default {
           price: this.price,
           quantity: this.quantity,
           location: this.location,
-          status: 'watch',
+          status: 'travel',
           image: this.image
         },
         headers: {
