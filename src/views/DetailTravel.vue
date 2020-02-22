@@ -8,7 +8,8 @@
         <div class="col-md-6">
           <div class="card-body">
             <h5 class="card-title">Card title</h5>
-            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+            <p class="card-text">From: {{$store.state.travelDetail.locationFrom}}</p>
+            <p class="card-text">To: {{$store.state.travelDetail.locationTo}}</p>
             <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
           </div>
         </div>
@@ -27,6 +28,9 @@ export default {
   name: 'DetailTravel',
   components: {
     ItemList
+  },
+  created () {
+    this.$store.dispatch('fetchTravelDetail', this.$route.params.id)
   }
 }
 </script>

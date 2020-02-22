@@ -10,7 +10,9 @@ export default new Vuex.Store({
     isLoading: false,
     itemList: [],
     travelList: [],
-    itemDetail: {}
+    itemDetail: {},
+    travelDetail: {},
+    userCart: {}
   },
   mutations: {
     LOGIN (state) {
@@ -33,6 +35,12 @@ export default new Vuex.Store({
     },
     FETCH_ITEM_DETAIL (state, payload) {
       state.itemDetail = payload
+    },
+    FETCH_TRAVEL_DETAIL (state, payload) {
+      state.travelDetail = payload
+    },
+    FETCH_USER_CART (state, payload) {
+      state.userCart = payload
     }
   },
   actions: {
@@ -82,6 +90,46 @@ export default new Vuex.Store({
           .then(({ data }) => {
             context.commit('LOADING_FINISH')
             context.commit('FETCH_ITEM_DETAIL', data)
+            resolve()
+          })
+          .catch(err => {
+            context.commit('LOADING_FINISH')
+            reject(err)
+          })
+      })
+    },
+    fetchTravelDetail (context, payload) {
+      context.commit('LOADING_START')
+      return new Promise(function (resolve, reject) {
+        axios({
+          method: 'GET',
+          url: `/travels/${payload}`
+        })
+          .then(({ data }) => {
+            console.log('sampai sini', data)
+            context.commit('LOADING_FINISH')
+            context.commit('FETCH_TRAVEL_DETAIL', data)
+            resolve()
+          })
+          .catch(err => {
+            context.commit('LOADING_FINISH')
+            reject(err)
+          })
+      })
+    },
+    fetchUserCart (context, payload) {
+      context.commit('LOADING_START')
+      return new Promise(function (resolve, reject) {
+        axios({
+          method: 'GET',
+          url: '/carts/user',
+          headers: {
+            token: localStorage.getItem('token')
+          }
+        })
+          .then(({ data }) => {
+            context.commit('LOADING_FINISH')
+            context.commit('FETCH_USER_CART', data)
             resolve()
           })
           .catch(err => {

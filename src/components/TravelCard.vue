@@ -6,13 +6,18 @@
       <p
         class="card-text"
       >Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-      <router-link to="/travels/89e9qyjsdfia" class="btn btn-primary">View Detail</router-link>
+      <router-link :to="`/travels/${travel._id}`" class="btn btn-primary">View Detail</router-link>
     </div>
   </div>
 </template>
 
 <script>
-export default {}
+export default {
+  name: 'TravelCard',
+  props: {
+    travel: Object
+  }
+}
 </script>
 
 <style>

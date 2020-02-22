@@ -19,7 +19,10 @@
 
 <script>
 export default {
-  name: 'Cart'
+  name: 'Cart',
+  created () {
+    this.$store.dispatch('fetchUserCart')
+  }
 }
 </script>
 
