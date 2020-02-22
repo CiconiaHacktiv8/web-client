@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
-import store from '../store'
+// import store from '../store'
 
 Vue.use(VueRouter)
 
@@ -92,7 +92,7 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  console.log(store.state)
+  // console.log(store.state)
   // if (!store.state.isLogin) {
   // if (to.matched.some(route => route.path === '')) {
   //   console.log('STORE', store)

@@ -14,9 +14,10 @@ export default {
   },
   methods: {
     checkLogin () {
-      console.log('check login triggered')
       if (localStorage.getItem('token')) {
         this.$store.commit('LOGIN')
+        this.$store.dispatch('fetchItemList')
+        this.$store.dispatch('fetchTravelList')
       } else {
         this.$router.push('/login')
       }
