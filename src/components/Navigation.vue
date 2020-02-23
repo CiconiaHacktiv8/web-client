@@ -13,6 +13,9 @@
         </b-nav-form>
       </b-navbar-nav>
       <b-navbar-nav>
+        <div class="d-flex justify-content-center align-items-center mx-2">
+          <span class="d-flex" v-if="$store.state.user.name" style="">Welcome, {{$store.state.user.name}}</span>
+        </div>
         <b-nav-item to="/cart">Cart</b-nav-item>
         <b-nav-item v-if="$store.state.isLogin" @click="handleLogout">Logout</b-nav-item>
         <b-nav-item v-if="!$store.state.isLogin" to="/login">Login</b-nav-item>

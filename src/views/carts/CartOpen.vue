@@ -2,9 +2,7 @@
   <div class="section d-flex flex-column">
     <h2>Open</h2>
     <div class="offered-list">
-      <open-item />
-      <open-item />
-      <open-item />
+      <open-item v-for="cart in $store.state.openCart" :key="cart._id" :cart="cart"/>
     </div>
   </div>
 </template>

@@ -7,25 +7,66 @@
         </div>
         <div class="col-md-6">
           <div class="card-body">
+            <div v-for="(error, i) in errors" :key="i" class="alert alert-danger text-center" role="alert">
+              {{error}}
+            </div>
             <h5 class="card-title">{{$store.state.itemDetail.name}}</h5>
             <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
             <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-            <a v-if="showOffer" class="btn btn-primary mx-3">Offer Help</a>
-            <a v-if="showRequest" @click="handleRequest" class="btn btn-primary mx-3">Request</a>
+            <a v-if="showOffer" v-b-modal.offer class="btn btn-primary mx-3">Offer Help</a>
+            <a v-if="showRequest" v-b-modal.quantity class="btn btn-primary mx-3">Request</a>
           </div>
         </div>
       </div>
     </div>
+    <b-modal id="quantity" title="Add Quantity" hide-footer>
+      <form @submit.prevent="handleRequest">
+        <div class="form-group">
+          <label for="quantity">how many do yo want?</label>
+          <input
+            type="number"
+            class="form-control"
+            id="quantity"
+            placeholder="1"
+            required
+            v-model="quantity"
+          />
+        </div>
+        <div class="text-center form-group">
+          <b-button type="submit" class="btn btn-primary">Post Request</b-button>
+        </div>
+      </form>
+    </b-modal>
+    <b-modal id="offer" title="Offer a help" hide-footer>
+      <form @submit.prevent="handleOffer">
+        <div class="form-group">
+          <label for="quantity">for how much?</label>
+          <input
+            type="number"
+            class="form-control"
+            id="quantity"
+            placeholder="1"
+            required
+            v-model="offer"
+          />
+        </div>
+        <div class="text-center form-group">
+          <b-button type="submit" class="btn btn-primary">Post Offer</b-button>
+        </div>
+      </form>
+    </b-modal>
   </div>
 </template>
 
 <script>
-// import axios from '../config/api'
+import axios from '../config/api'
 export default {
   name: 'DetailItem',
   data () {
     return {
-      errors: []
+      errors: [],
+      quantity: 1,
+      offer: 1000
     }
   },
   computed: {
@@ -33,7 +74,6 @@ export default {
       return this.$store.state.itemDetail
     },
     showOffer () {
-      // if(this.$store.state.itemDetail.travelId){
       if (this.$store.state.itemDetail.ownerId.email === this.$store.state.user.email) {
         return false
       } else if (this.$store.state.itemDetail.status === 'travel') {
@@ -41,13 +81,6 @@ export default {
       } else {
         return true
       }
-      // } else {
-      //   if(this.$store.state.itemDetail.ownerId.email === this.$store.state.user.email) {
-      //     return false
-      //   } else {
-      //     return true
-      //   }
-      // }
     },
     showRequest () {
       if (this.$store.state.itemDetail.ownerId.email === this.$store.state.user.email) {
@@ -61,23 +94,50 @@ export default {
   },
   methods: {
     handleRequest () {
-      console.log('request')
-      // this.errors = []
-      // axios({
-      //   method: 'POST',
-      //   url: '/carts',
-      //   data: {
-      //   },
-      //   headers: {
-      //     token: localStorage.getItem('token')
-      //   }
-      // })
-      //   .then(({ data }) => {
-      //     this.$router.push('/')
-      //   })
-      //   .catch(err => {
-      //     this.errors = err.response.data.errors
-      //   })
+      this.errors = []
+      axios({
+        method: 'POST',
+        url: '/carts',
+        data: {
+          travelId: this.item.travelId,
+          itemId: this.item._id,
+          quantity: this.quantity,
+          status: 'open'
+        },
+        headers: {
+          token: localStorage.getItem('token')
+        }
+      })
+        .then(({ data }) => {
+          this.$bvModal.hide('quantity')
+        })
+        .catch(err => {
+          this.errors = err.response.data.errors
+        })
+    },
+    handleOffer () {
+      this.errors = []
+      axios({
+        method: 'POST',
+        url: '/carts',
+        data: {
+          travelId: this.item.travelId,
+          itemId: this.item._id,
+          quantity: this.item.quantity,
+          status: 'offered',
+          fixPrice: this.offer
+        },
+        headers: {
+          token: localStorage.getItem('token')
+        }
+      })
+        .then(({ data }) => {
+          this.$bvModal.hide('offer')
+        })
+        .catch(err => {
+          this.errors = err.response.data.errors
+        })
+      this.$bvModal.hide('offer')
     }
   },
   created () {

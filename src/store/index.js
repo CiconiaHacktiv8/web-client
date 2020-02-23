@@ -29,7 +29,11 @@ export default new Vuex.Store({
       location: ''
     },
     travelDetail: {},
-    userCart: {}
+    userCart: {},
+    openCart: [],
+    offeredCart: [],
+    purchaseCart: [],
+    deliveryCart: []
   },
   mutations: {
     SET_USER (state, payload) {
@@ -61,6 +65,18 @@ export default new Vuex.Store({
     },
     FETCH_USER_CART (state, payload) {
       state.userCart = payload
+    },
+    SET_OPEN_CART (state, payload) {
+      state.openCart = payload
+    },
+    SET_OFFERED_CART (state, payload) {
+      state.offeredCart = payload
+    },
+    SET_PURCHASE_CART (state, payload) {
+      state.purchaseCart = payload
+    },
+    SET_DELIVERY_CART (state, payload) {
+      state.deliveryCart = payload
     }
   },
   actions: {
@@ -149,6 +165,37 @@ export default new Vuex.Store({
           .then(({ data }) => {
             context.commit('LOADING_FINISH')
             context.commit('FETCH_USER_CART', data)
+            console.log('FETCH cart success', data)
+            context.commit('SET_OPEN_CART', data.open)
+            context.commit('SET_OFFERED_CART', data.offered)
+            context.commit('SET_PURCHASE_CART', data.pendingPurchase)
+            context.commit('SET_DELIVERY_CART', data.pendingDelivery)
+            resolve()
+          })
+          .catch(err => {
+            context.commit('LOADING_FINISH')
+            reject(err)
+          })
+      })
+    },
+    refetchUserCart (context, payload) {
+      context.commit('LOADING_START')
+      return new Promise(function (resolve, reject) {
+        axios({
+          method: 'GET',
+          url: '/carts/user',
+          headers: {
+            token: localStorage.getItem('token')
+          }
+        })
+          .then(({ data }) => {
+            context.commit('LOADING_FINISH')
+            context.commit('FETCH_USER_CART', data)
+            console.log('REFETCH cart success', data)
+            context.commit('SET_OPEN_CART', data.open)
+            context.commit('SET_OFFERED_CART', data.offered)
+            context.commit('SET_PURCHASE_CART', data.pendingPurchase)
+            context.commit('SET_DELIVERY_CART', data.pendingDelivery)
             resolve()
           })
           .catch(err => {

@@ -21,7 +21,7 @@
 export default {
   name: 'Cart',
   created () {
-    this.$store.dispatch('fetchUserCart')
+    // this.$store.dispatch('fetchUserCart')
   }
 }
 </script>

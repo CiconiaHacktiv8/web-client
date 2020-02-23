@@ -1,5 +1,8 @@
 <template>
   <div class="card my-1" style="width: 100%">
+    <div v-for="(error, i) in errors" :key="i" class="alert alert-danger text-center" role="alert">
+      {{error}}
+    </div>
     <div class="row no-gutters">
       <div class="col-md-2 d-flex align-items-center">
         <img
@@ -20,15 +23,45 @@
         </div>
       </div>
       <div class="col-md-2 d-flex flex-column justify-content-center align-items-center">
-        <a href="#" class="btn btn-primary my-1">Accept</a>
+        <a @click="handleAccept" class="btn btn-primary my-1">Accept</a>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import axios from '../../config/api'
 export default {
-  name: 'OpenItem'
+  name: 'OpenItem',
+  data () {
+    return {
+      errors: []
+    }
+  },
+  props: {
+    cart: Object
+  },
+  methods: {
+    handleAccept () {
+      this.errors = []
+      axios({
+        method: 'PATCH',
+        url: `/carts/${this.cart._id}`,
+        data: {
+          status: 'pending purchase'
+        },
+        headers: {
+          token: localStorage.getItem('token')
+        }
+      })
+        .then(({ data }) => {
+          this.$store.dispatch('fetchUserCart')
+        })
+        .catch(err => {
+          this.errors = err.response.data.errors
+        })
+    }
+  }
 }
 </script>
 

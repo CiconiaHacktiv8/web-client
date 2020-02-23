@@ -3,8 +3,7 @@
     <div class="section d-flex flex-column">
       <h2>Pending Purchase</h2>
       <div>
-        <purchase-item />
-        <purchase-item />
+        <purchase-item v-for="cart in $store.state.purchaseCart" :key="cart._id" :cart="cart" />
       </div>
     </div>
   </div>
