@@ -1,5 +1,5 @@
 <template>
-  <b-navbar variant="primary" type="dark" fixed="top">
+  <b-navbar variant="primary" type="dark" fixed="top" id="custom-nav">
     <b-navbar-brand to="/">
       <img src="https://i.postimg.cc/hGVCbznv/white-Asset-2.png" width="30" class="d-inline-block align-top" alt="Kitten">
       Ciconia
@@ -46,3 +46,11 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+#custom-nav {
+  border-bottom-left-radius: 40px;
+  height: 75px;
+  padding-left: 40px
+}
+</style>
