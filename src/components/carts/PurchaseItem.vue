@@ -21,7 +21,6 @@
       </div>
       <div class="col-md-2 d-flex flex-column justify-content-center align-items-center">
         <a v-b-modal.purchase class="btn btn-primary my-1">Purchase</a>
-        <!-- <a href="#" class="btn btn-primary my-1">Reject</a> -->
       </div>
     </div>
     <b-modal id="purchase" title="Purchase Item" hide-footer>
