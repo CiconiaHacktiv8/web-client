@@ -4,7 +4,7 @@
     style="width: 18rem; display: inline-block; float: none; white-space: normal; margin: 5px"
   >
     <div class="d-flex justify-content-center pt-2 bg-primary">
-      <img src="https://storage.cloud.google.com/images-bucket-arief/placeholder-user1.png" width="75" height="75" class="rounded-circle">
+      <img src="https://storage.cloud.google.com/images-bucket-arief/placeholder-user1.png" width="75" height="75" class="rounded-circle p-1 border bg-light">
     </div>
     <div class="d-flex justify-content-center bg-primary">
       <h5 class="card-title pt-2 text-white">{{ travel.userId.name }}</h5>
