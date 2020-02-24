@@ -102,7 +102,8 @@ export default {
           travelId: this.item.travelId,
           itemId: this.item._id,
           quantity: this.quantity,
-          status: 'open'
+          status: 'open',
+          fixPrice: this.item.price
         },
         headers: {
           token: localStorage.getItem('token')

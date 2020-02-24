@@ -37,6 +37,6 @@ export default {
 
 <style lang="scss" scoped>
 .home {
-  padding-top: 64px;
+  padding-top: 75px;
 }
 </style>

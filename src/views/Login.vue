@@ -57,7 +57,7 @@
           </div>
         </div>
         <div class="form-check text-center form-group">
-          <input type="checkbox" class="form-check-input" id="remember" />
+          <input type="checkbox" class="form-check-input" id="remember" v-model="remember" />
           <label class="form-check-label" for="remember">remember me</label>
         </div>
         <div class="text-center form-group">
@@ -82,7 +82,8 @@ export default {
     return {
       email: '',
       password: '',
-      errors: []
+      errors: [],
+      remember: false
     }
   },
   methods: {
@@ -108,9 +109,17 @@ export default {
           localStorage.setItem('name', data.name)
           localStorage.setItem('email', data.email)
           localStorage.setItem('point', data.point)
-          this.email = ''
-          this.password = ''
-          this.$router.push('/')
+          // admin beta
+          if (this.email === 'asd@asd.com') {
+            this.email = ''
+            this.password = ''
+            this.$router.push('/admin')
+          } else {
+            // admin beta
+            this.email = ''
+            this.password = ''
+            this.$router.push('/')
+          }
         })
         .catch(err => {
           this.errors = err.response.data.errors
