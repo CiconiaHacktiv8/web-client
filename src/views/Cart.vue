@@ -2,10 +2,12 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-2">
-        <span>Your on going transaction:</span>
+        <span>On going transaction:</span>
         <b-nav vertical class="w-25">
           <b-nav-item to="/cart" active>Open</b-nav-item>
+          <b-nav-item to="/cart/itemordered">Ordered</b-nav-item>
           <b-nav-item to="/cart/offered">Offered</b-nav-item>
+          <b-nav-item to="/cart/itemtobuy">Item To Buy</b-nav-item>
           <b-nav-item to="/cart/pendingpurchase">Pending Purchase</b-nav-item>
           <b-nav-item to="/cart/confrimdelivery">Confirm Delivery</b-nav-item>
         </b-nav>

@@ -36,6 +36,16 @@ const routes = [
             component: () => import(/* webpackChunkName: "offered" */ '../views/carts/CartOffered.vue')
           },
           {
+            path: 'itemtobuy',
+            name: 'ItemToBuy',
+            component: () => import(/* webpackChunkName: "itemtobuy" */ '../views/carts/CartToBuy.vue')
+          },
+          {
+            path: 'itemordered',
+            name: 'ItemOrdered',
+            component: () => import(/* webpackChunkName: "itemordered" */ '../views/carts/CartOrdered.vue')
+          },
+          {
             path: 'pendingpurchase',
             name: 'Purchase',
             component: () => import(/* webpackChunkName: "purchase" */ '../views/carts/CartPurchase.vue')

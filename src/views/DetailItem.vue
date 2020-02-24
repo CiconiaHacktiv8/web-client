@@ -118,6 +118,7 @@ export default {
       })
         .then(({ data }) => {
           this.$bvModal.hide('quantity')
+          this.$store.dispatch('fetchItemOrdered')
         })
         .catch(err => {
           this.errors = err.response.data.errors

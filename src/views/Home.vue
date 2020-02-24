@@ -24,6 +24,8 @@ export default {
         this.$store.dispatch('fetchItemList')
         this.$store.dispatch('fetchTravelList')
         this.$store.dispatch('fetchUserCart')
+        this.$store.dispatch('fetchItemToBuy')
+        this.$store.dispatch('fetchItemOrdered')
       } else {
         this.$router.push('/login')
       }

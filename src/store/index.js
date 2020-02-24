@@ -33,7 +33,9 @@ export default new Vuex.Store({
     openCart: [],
     offeredCart: [],
     purchaseCart: [],
-    deliveryCart: []
+    deliveryCart: [],
+    itemToBuy: [],
+    itemOrdered: []
   },
   mutations: {
     SET_USER (state, payload) {
@@ -77,6 +79,12 @@ export default new Vuex.Store({
     },
     SET_DELIVERY_CART (state, payload) {
       state.deliveryCart = payload
+    },
+    SET_ITEM_TO_BUY (state, payload) {
+      state.itemToBuy = payload
+    },
+    SET_ITEM_ORDERED (state, payload) {
+      state.itemOrdered = payload
     }
   },
   actions: {
@@ -196,6 +204,48 @@ export default new Vuex.Store({
             context.commit('SET_OFFERED_CART', data.offered)
             context.commit('SET_PURCHASE_CART', data.pendingPurchase)
             context.commit('SET_DELIVERY_CART', data.pendingDelivery)
+            resolve()
+          })
+          .catch(err => {
+            context.commit('LOADING_FINISH')
+            reject(err)
+          })
+      })
+    },
+    fetchItemToBuy (context) {
+      context.commit('LOADING_START')
+      return new Promise(function (resolve, reject) {
+        axios({
+          method: 'GET',
+          url: '/carts/travel',
+          headers: {
+            token: localStorage.getItem('token')
+          }
+        })
+          .then(({ data }) => {
+            context.commit('LOADING_FINISH')
+            context.commit('SET_ITEM_TO_BUY', data)
+            resolve()
+          })
+          .catch(err => {
+            context.commit('LOADING_FINISH')
+            reject(err)
+          })
+      })
+    },
+    fetchItemOrdered (context) {
+      context.commit('LOADING_START')
+      return new Promise(function (resolve, reject) {
+        axios({
+          method: 'GET',
+          url: '/carts/open',
+          headers: {
+            token: localStorage.getItem('token')
+          }
+        })
+          .then(({ data }) => {
+            context.commit('LOADING_FINISH')
+            context.commit('SET_ITEM_ORDERED', data)
             resolve()
           })
           .catch(err => {
