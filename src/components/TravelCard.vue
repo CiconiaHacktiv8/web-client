@@ -11,12 +11,14 @@
     </div>
     <div class="card-body pt-3">
       <p class="card-text">
-        <small class="fas fa-globe-asia text-primary"></small> <small class="" style="color: gray">Dari: {{ travel.locationFrom }}</small> <br />
-        <small class="fas fa-clock text-primary"></small> <small class="" style="color: gray">Pulang: {{ localeTime }}</small>
+        <small class="fas fa-globe-asia text-primary"></small> <small class="" style="color: gray">From: {{ travel.locationFrom }}</small> <br />
+        <small class="fas fa-clock text-primary"></small> <small class="" style="color: gray">Depart: {{ localeTime }}</small>
       </p>
-      <router-link :to="`/travels/${travel._id}`" class="btn btn-primary"
-        >View Detail</router-link
-      >
+      <div class="text-center">
+        <router-link :to="`/travels/${travel._id}`" class="btn btn-primary"
+          >View Detail</router-link
+        >
+      </div>
     </div>
   </div>
 </template>

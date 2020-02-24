@@ -16,10 +16,10 @@
           <h5 class="card-title">{{cart.itemId.name}}</h5>
           <p
             class="card-text"
-          >Item Origin: </p>
+          >Item Origin: {{cart.travelId.locationFrom}}</p>
           <p
             class="card-text"
-          >Destination: </p>
+          >Destination: {{cart.travelId.locationTo}}</p>
           <p
             v-if="cart.status === 'offered'"
             class="card-text"
@@ -31,7 +31,10 @@
           <p
             v-if="cart.status !== 'offered'"
             class="card-text"
-          >Fixed Price: </p>
+          >Fixed Price: {{cart.itemId.price}}</p>
+          <p
+            class="card-text"
+          >Quantity: {{cart.quantity}}</p>
           <p class="card-text">
             <small class="text-muted">Last updated 3 mins ago</small>
           </p>
@@ -65,7 +68,7 @@
     <b-modal id="purchase" title="Purchase Item" hide-footer>
       <form @submit.prevent="handlePurchase">
         <div class="form-group">
-          <label for="purchase">Total Purchase: sekian sekian</label>
+          <label for="purchase">Total Purchase: {{cart.quantity * cart.itemId.price}}</label>
         </div>
         <div class="text-center form-group">
           <b-button type="submit" class="btn btn-primary">Purchase</b-button>

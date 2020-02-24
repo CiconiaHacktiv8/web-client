@@ -1,9 +1,11 @@
 <template>
   <div id="dashboard-custom">
-    <h1>TRAVEL LIST</h1>
-    <travel-list />
-    <div class="container">
-      <h1>ITEM LIST</h1>
+    <div class="container-fluid">
+      <h1 class="h3 m-2 pl-5">Travelers around the world:</h1>
+      <travel-list />
+    </div>
+    <div class="container mt-5">
+      <h1 class="h3">Explore items and requests:</h1>
       <item-list />
     </div>
   </div>

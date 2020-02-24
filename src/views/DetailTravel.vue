@@ -7,10 +7,10 @@
         </div>
         <div class="col-md-6">
           <div class="card-body">
-            <h5 class="card-title">Card title</h5>
+            <h5 class="card-title">{{$store.state.travelDetail.userId.name}}</h5>
             <p class="card-text">From: {{$store.state.travelDetail.locationFrom}}</p>
             <p class="card-text">To: {{$store.state.travelDetail.locationTo}}</p>
-            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+            <p class="card-text"><small class="text-muted">Departure: {{localeTime}}</small></p>
           </div>
         </div>
       </div>
@@ -23,6 +23,7 @@
 </template>
 
 <script>
+import moment from 'moment'
 import TravelItemList from '../components/TravelItemList'
 export default {
   name: 'DetailTravel',
@@ -31,6 +32,13 @@ export default {
   },
   created () {
     this.$store.dispatch('fetchTravelDetail', this.$route.params.id)
+  },
+  computed: {
+    localeTime () {
+      return this.$store.state.travelDetail.departure
+        ? moment(this.$store.state.travelDetail.departure).format('D MMM YYYY')
+        : new Date().toLocaleString()
+    }
   }
 }
 </script>
