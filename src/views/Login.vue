@@ -148,10 +148,4 @@ export default {
   border-radius: 1rem;
   background-color: white
 }
-.test {
-  background-color: blueviolet;
-}
-.test2 {
-  background-color: aqua;
-}
 </style>

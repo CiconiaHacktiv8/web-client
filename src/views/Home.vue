@@ -38,5 +38,6 @@ export default {
 <style lang="scss" scoped>
 .home {
   padding-top: 75px;
+  min-height: 100vh
 }
 </style>

@@ -54,20 +54,20 @@
       </div>
       <div class="form-group">
         <label for="itemImage">Item image</label>
-        <!-- <b-form-file
+        <b-form-file
         id="itemImage"
         v-model="file"
         :state="Boolean(file)"
         placeholder="Choose a file or drop it here..."
         drop-placeholder="Drop file here..."
-      ></b-form-file> -->
-        <input
+      ></b-form-file>
+        <!-- <input
             type="text"
             class="form-control"
             id="itemImage"
             placeholder="Url Image"
             v-model="image"
-          />
+          /> -->
       </div>
       <div class="text-center form-group">
         <button type="submit" class="btn btn-primary">Post</button>
@@ -94,17 +94,25 @@ export default {
   methods: {
     handleSubmit () {
       this.errors = []
+      const formData = new FormData()
+      formData.set('name', this.name)
+      formData.set('price', this.price)
+      formData.set('quantity', this.quantity)
+      formData.set('location', this.location)
+      formData.set('status', 'watch')
+      formData.set('image', this.file)
       axios({
         method: 'POST',
-        url: '/items',
-        data: {
-          name: this.name,
-          price: this.price,
-          quantity: this.quantity,
-          location: this.location,
-          status: 'watch',
-          image: this.image
-        },
+        url: '/items/web',
+        // data: {
+        //   name: this.name,
+        //   price: this.price,
+        //   quantity: this.quantity,
+        //   location: this.location,
+        //   status: 'watch',
+        //   image: this.image
+        // },
+        data: formData,
         headers: {
           token: localStorage.getItem('token')
         }
