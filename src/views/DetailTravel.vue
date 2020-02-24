@@ -2,21 +2,25 @@
   <div class="container">
     <div class="card" style="width: 100%">
       <div class="row no-gutters">
-        <div class="col-md-6 d-flex align-items-center">
-          <img src="https://picsum.photos/600/300/?image=525" class="card-img img-fluid d-flex" alt="picsum">
+        <div class="col-md-3 d-flex align-items-center justify-content-center">
+          <div class="d-flex">
+            <img src="https://storage.cloud.google.com/images-bucket-arief/placeholder-user1.png" width="125" height="125" class="rounded-circle p-1 border bg-light img-fluid">
+          </div>
         </div>
-        <div class="col-md-6">
-          <div class="card-body">
-            <h5 class="card-title">{{$store.state.travelDetail.userId.name}}</h5>
-            <p class="card-text">From: {{$store.state.travelDetail.locationFrom}}</p>
-            <p class="card-text">To: {{$store.state.travelDetail.locationTo}}</p>
+        <div class="col-md-9">
+          <div class="card-body text-center">
+            <h5 class="card-title">Traveller name: {{$store.state.travelDetail.userId.name}}</h5>
+            <div class="d-flex justify-content-center">
+            <h5 class="card-title">Itinerary :</h5>
+            <span class="d-flex card-text m-4">From: {{$store.state.travelDetail.locationFrom}}</span> <span class="d-flex card-text m-4">To: {{$store.state.travelDetail.locationTo}}</span>
+            </div>
             <p class="card-text"><small class="text-muted">Departure: {{localeTime}}</small></p>
           </div>
         </div>
       </div>
     </div>
-    <div>
-      <h1>ITEM LIST</h1>
+    <div class="container mt-5">
+      <h1 class="h3">Explore items you can request:</h1>
       <travel-item-list />
     </div>
   </div>

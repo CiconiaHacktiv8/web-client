@@ -130,9 +130,9 @@ export default {
         url: '/carts',
         data: {
           // buyer id dati item owner id
-          travelId: this.item.travelId,
+          // travelId: this.item.travelId,
           itemId: this.item._id,
-          quantity: this.item.quantity,
+          // quantity: this.item.quantity,
           status: 'offered',
           fixPrice: this.offer
         },

@@ -28,7 +28,7 @@ export default new Vuex.Store({
       status: '',
       location: ''
     },
-    travelDetail: {},
+    travelDetail: { userId: { name: '' } },
     userCart: {},
     openCart: [],
     offeredCart: [],

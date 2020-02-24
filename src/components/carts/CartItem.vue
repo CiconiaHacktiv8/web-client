@@ -44,7 +44,8 @@
         <a v-b-modal.confirm class="btn btn-primary my-1">Confirm</a>
       </div>
       <div v-if="cart.status === 'pending purchase'" class="col-md-2 d-flex flex-column justify-content-center align-items-center">
-        <a v-b-modal.purchase class="btn btn-primary my-1">Purchase</a>
+        <a v-if="!cart.invoiceId" @click="handleXendit" class="btn btn-primary my-1">Purchase</a>
+        <span v-if="cart.invoiceId">waiting payment..</span><a v-if="cart.invoiceId" @click="handleRecheck" class="btn btn-primary my-1 mx-2">Recheck?</a>
       </div>
       <div v-if="cart.status === 'offered'" class="col-md-2 d-flex flex-column justify-content-center align-items-center">
         <a @click="handleOffer" class="btn btn-primary my-1">Accept Offer</a>
@@ -169,6 +170,33 @@ export default {
           this.errors = err.response.data.errors
         })
     },
+    async handleXendit () {
+      const invoice = await axios({
+        method: 'POST',
+        url: '/payment',
+        data: {
+          description: this.cart.itemId.name,
+          amount: this.cart.itemId.price * this.cart.quantity
+        },
+        headers: {
+          token: localStorage.getItem('token')
+        }
+      })
+      console.log(invoice.data)
+      const { data } = await axios({
+        method: 'PATCH',
+        url: `/carts/${this.cart._id}`,
+        data: {
+          invoiceId: invoice.data.id
+        },
+        headers: {
+          token: localStorage.getItem('token')
+        }
+      })
+      console.log(data)
+      window.open(invoice.data.invoice_url, '_blank')
+      this.$store.dispatch('refetchUserCart')
+    },
     handlePurchase () {
       this.errors = []
       axios({
@@ -188,6 +216,29 @@ export default {
         .catch(err => {
           this.errors = err.response.data.errors
         })
+    },
+    handleRecheck () {
+      this.errors = []
+      axios({
+        method: 'GET',
+        url: `/payment/${this.cart.invoiceId}`,
+        headers: {
+          token: localStorage.getItem('token')
+        }
+      })
+        .then(({ data }) => {
+          if (data.status === 'SETTLED') {
+            this.handlePurchase()
+          }
+        })
+        .catch(err => {
+          this.errors = err.response.data.errors
+        })
+    }
+  },
+  created () {
+    if (this.cart.invoiceId) {
+      this.handleRecheck()
     }
   }
 }
