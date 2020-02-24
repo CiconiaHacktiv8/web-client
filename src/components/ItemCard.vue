@@ -6,6 +6,7 @@
       <ul class="list-group list-group-flush">
         <li class="list-group-item">Location: {{item.location}}</li>
         <li class="list-group-item">Price: {{item.price}}</li>
+        <li class="list-group-item">Status: {{item.status}}</li>
       </ul>
       <router-link :to="`/items/${item._id}`" class="btn btn-primary">View Detail</router-link>
     </div>

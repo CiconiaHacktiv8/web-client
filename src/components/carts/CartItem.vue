@@ -45,7 +45,7 @@
       </div>
       <div v-if="cart.status === 'offered'" class="col-md-2 d-flex flex-column justify-content-center align-items-center">
         <a @click="handleOffer" class="btn btn-primary my-1">Accept Offer</a>
-        <a href="#" class="btn btn-primary my-1">Reject</a>
+        <a @click="handleReject" class="btn btn-primary my-1">Reject</a>
       </div>
       <div v-if="cart.status === 'open'" class="col-md-2 d-flex flex-column justify-content-center align-items-center">
         <a @click="handleAccept" class="btn btn-primary my-1">Accept</a>
@@ -109,6 +109,43 @@ export default {
     },
     handleOffer () {
       console.log('handle accept')
+      axios({
+        method: 'PATCH',
+        url: `/carts/${this.cart._id}`,
+        data: {
+          status: 'pending purchase'
+        },
+        headers: {
+          token: localStorage.getItem('token')
+        }
+      })
+        .then(({ data }) => {
+          console.log('ofer accepted')
+          this.$store.dispatch('fetchUserCart')
+        })
+        .catch(err => {
+          this.errors = err.response.data.errors
+        })
+    },
+    handleReject () {
+      console.log('handle reject')
+      axios({
+        method: 'PATCH',
+        url: `/carts/${this.cart._id}`,
+        data: {
+          status: 'reject'
+        },
+        headers: {
+          token: localStorage.getItem('token')
+        }
+      })
+        .then(({ data }) => {
+          console.log('ofer rejected')
+          this.$store.dispatch('fetchUserCart')
+        })
+        .catch(err => {
+          this.errors = err.response.data.errors
+        })
     },
     handleConfirm () {
       axios({

@@ -11,7 +11,7 @@
               {{error}}
             </div>
             <h5 class="card-title">{{$store.state.itemDetail.name}}</h5>
-            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+            <p class="card-text">Location: {{$store.state.itemDetail.location}}</p>
             <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
             <a v-if="showOffer" v-b-modal.offer class="btn btn-primary mx-3">Offer Help</a>
             <a v-if="showRequest" v-b-modal.quantity class="btn btn-primary mx-3">Request</a>

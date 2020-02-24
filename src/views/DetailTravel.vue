@@ -17,17 +17,17 @@
     </div>
     <div>
       <h1>ITEM LIST</h1>
-      <item-list />
+      <travel-item-list />
     </div>
   </div>
 </template>
 
 <script>
-import ItemList from '../components/ItemList'
+import TravelItemList from '../components/TravelItemList'
 export default {
   name: 'DetailTravel',
   components: {
-    ItemList
+    TravelItemList
   },
   created () {
     this.$store.dispatch('fetchTravelDetail', this.$route.params.id)
