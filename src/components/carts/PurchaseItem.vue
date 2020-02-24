@@ -20,16 +20,56 @@
         </div>
       </div>
       <div class="col-md-2 d-flex flex-column justify-content-center align-items-center">
-        <a href="#" class="btn btn-primary my-1">Confirm</a>
-        <a href="#" class="btn btn-primary my-1">Reject</a>
+        <a v-b-modal.purchase class="btn btn-primary my-1">Purchase</a>
       </div>
     </div>
+    <b-modal id="purchase" title="Purchase Item" hide-footer>
+      <form @submit.prevent="handlePurchase">
+        <div class="form-group">
+          <label for="purchase">Total Purchase: sekian sekian</label>
+        </div>
+        <div class="text-center form-group">
+          <b-button type="submit" class="btn btn-primary">Purchase</b-button>
+        </div>
+      </form>
+    </b-modal>
   </div>
 </template>
 
 <script>
+import axios from '../../config/api'
 export default {
-  name: 'PurchaseItem'
+  name: 'PurchaseItem',
+  data () {
+    return {
+      errors: []
+    }
+  },
+  props: {
+    cart: Object
+  },
+  methods: {
+    handlePurchase () {
+      this.errors = []
+      axios({
+        method: 'PATCH',
+        url: `/carts/${this.cart._id}`,
+        data: {
+          status: 'pending delivery'
+        },
+        headers: {
+          token: localStorage.getItem('token')
+        }
+      })
+        .then(({ data }) => {
+          this.$bvModal.hide('purchase')
+          this.$store.dispatch('refetchUserCart')
+        })
+        .catch(err => {
+          this.errors = err.response.data.errors
+        })
+    }
+  }
 }
 </script>
 

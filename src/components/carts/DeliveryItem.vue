@@ -20,15 +20,56 @@
         </div>
       </div>
       <div class="col-md-2 d-flex flex-column justify-content-center align-items-center">
-        <a href="#" class="btn btn-primary my-1">Confirm</a>
+        <a v-b-modal.confirm class="btn btn-primary my-1">Confirm</a>
       </div>
     </div>
+    <b-modal id="confirm" title="Confirm Delivery" hide-footer>
+      <form @submit.prevent="handleConfirm">
+        <div class="form-group">
+          <p>Are You Sure? </p>
+          <p>make sure the item is correct and in a good shape</p>
+        </div>
+        <div class="text-center form-group">
+          <b-button type="submit" class="btn btn-primary">Confirm</b-button>
+        </div>
+      </form>
+    </b-modal>
   </div>
 </template>
 
 <script>
+import axios from '../../config/api'
 export default {
-  name: 'DeliveryItem'
+  name: 'DeliveryItem',
+  data () {
+    return {
+      errors: []
+    }
+  },
+  props: {
+    cart: Object
+  },
+  methods: {
+    handleConfirm () {
+      axios({
+        method: 'PATCH',
+        url: `/carts/${this.cart._id}`,
+        data: {
+          status: 'completed'
+        },
+        headers: {
+          token: localStorage.getItem('token')
+        }
+      })
+        .then(({ data }) => {
+          this.$bvModal.hide('confirm')
+          this.$store.dispatch('fetchUserCart')
+        })
+        .catch(err => {
+          this.errors = err.response.data.errors
+        })
+    }
+  }
 }
 </script>
 

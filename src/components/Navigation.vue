@@ -1,5 +1,5 @@
 <template>
-  <b-navbar variant="primary" type="dark" fixed="top">
+  <b-navbar variant="primary" type="dark" fixed="top" id="custom-nav">
     <b-navbar-brand to="/">
       <img src="https://i.postimg.cc/hGVCbznv/white-Asset-2.png" width="30" class="d-inline-block align-top" alt="Kitten">
       Ciconia
@@ -13,6 +13,9 @@
         </b-nav-form>
       </b-navbar-nav>
       <b-navbar-nav>
+        <div class="d-flex justify-content-center align-items-center mx-2">
+          <span class="d-flex" v-if="$store.state.user.name" style="">Welcome, {{$store.state.user.name}}</span>
+        </div>
         <b-nav-item to="/cart">Cart</b-nav-item>
         <b-nav-item v-if="$store.state.isLogin" @click="handleLogout">Logout</b-nav-item>
         <b-nav-item v-if="!$store.state.isLogin" to="/login">Login</b-nav-item>
@@ -43,3 +46,11 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+#custom-nav {
+  border-bottom-left-radius: 40px;
+  height: 75px;
+  padding-left: 40px
+}
+</style>

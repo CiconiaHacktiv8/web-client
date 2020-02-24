@@ -23,6 +23,7 @@ export default {
         })
         this.$store.dispatch('fetchItemList')
         this.$store.dispatch('fetchTravelList')
+        this.$store.dispatch('fetchUserCart')
       } else {
         this.$router.push('/login')
       }

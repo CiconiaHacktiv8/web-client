@@ -1,16 +1,34 @@
 <template>
   <div class="fill">
-    <div class="login-div">
+    <div class="login-div shadow-lg">
       <form @submit.prevent="handleSubmit">
-        <div class="text-center">
-          <h2>Please Login</h2>
+        <div class="text-center d-flex flex-column align-items-center mb-4">
+          <div class="w-25 d-flex">
+            <img src="https://i.postimg.cc/0jgvRYLv/blue-Asset-2.png" alt="ciconia" class="img-fluid">
+          </div>
+          <h2 style="color: #28AAE1">Ciconia</h2>
         </div>
         <div v-for="(error, i) in errors" :key="i" class="alert alert-danger text-center" role="alert">
           {{error}}
         </div>
-        <div class="form-group">
-          <label for="exampleInputEmail1">Your Email</label>
-          <input
+        <div class="form-group shadow">
+          <!-- <label for="exampleInputEmail1">Your Email</label> -->
+          <div class="input-group mb-3">
+            <div class="input-group-prepend" style="background-color: #fff">
+              <span class="input-group-text" id="basic-addon1"><i class="material-icons">email</i></span>
+            </div>
+            <!-- <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1"> -->
+            <input
+              type="email"
+              class="form-control"
+              id="exampleInputEmail1"
+              aria-describedby="basic-addon1"
+              placeholder="Enter email"
+              required
+              v-model="email"
+            />
+          </div>
+          <!-- <input
             type="email"
             class="form-control"
             id="exampleInputEmail1"
@@ -18,18 +36,25 @@
             placeholder="Enter email"
             required
             v-model="email"
-          />
+          /> -->
         </div>
-        <div class="form-group">
-          <label for="exampleInputPassword1">Password</label>
-          <input
-            type="password"
-            class="form-control"
-            id="exampleInputPassword1"
-            placeholder="Password"
-            required
-            v-model="password"
-          />
+        <div class="form-group shadow">
+          <!-- <label for="exampleInputPassword1">Password</label> -->
+          <div class="input-group mb-3">
+            <div class="input-group-prepend" style="background-color: #fff">
+              <span class="input-group-text" id="basic-addon2"><i class="material-icons">lock</i></span>
+            </div>
+            <!-- <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1"> -->
+            <input
+              type="password"
+              class="form-control"
+              id="exampleInputPassword1"
+              aria-describedby="basic-addon2"
+              placeholder="Password"
+              required
+              v-model="password"
+            />
+          </div>
         </div>
         <div class="form-check text-center form-group">
           <input type="checkbox" class="form-check-input" id="remember" />
@@ -37,11 +62,11 @@
         </div>
         <div class="text-center form-group">
           <div class="text-center form-group">
-            <button type="submit" class="btn btn-primary">Login</button>
+            <button type="submit" class="btn btn-primary" style="border-radius: 50px; width: 70%;">Sign In</button>
           </div>
           <div class="text-center">
             <span>don't have an account? </span>
-            <router-link to="/register">register</router-link>
+            <router-link to="/register">Sign Up</router-link>
           </div>
         </div>
       </form>
@@ -110,6 +135,9 @@ export default {
 }
 .login-div {
   min-width: 400px;
+  padding: 2rem;
+  border-radius: 1rem;
+  background-color: white
 }
 .test {
   background-color: blueviolet;
