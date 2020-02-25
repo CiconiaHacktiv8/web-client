@@ -2,7 +2,7 @@
   <div class="container" style="margin-top: -75px;">
     <div class="d-flex justify-content-center align-items-center vh-100" style="margin-top: -75px;">
       <!-- <form @submit.prevent="handleSubmit" class="mt-2 bg-light shadow-lg" style="padding: 0 50px; border-radius: 20px; width: 50rem;"> -->
-    <form class="mt-2 bg-light shadow-lg" style="border-radius: 20px; width: 50rem; background: rgb(0,212,255);background: linear-gradient(325deg, rgba(0,212,255,1) 0%, rgba(255,255,255,1) 53%);">
+    <form class="mt-2 bg-light shadow-lg" style="border-radius: 20px; width: 50rem;background: rgb(40,170,225); background: linear-gradient(180deg, rgba(40,170,225,1) 0%, rgba(206,235,248,1) 0%, rgba(222,241,250,1) 40%, rgba(255,255,255,1) 100%);">
       <div class="text-center bg-primary mb-3 py-3" style="border-radius: 20px 20px 0 0;">
         <h2 class="text-light m-0 p-0">Request Item</h2>
       </div>
@@ -20,7 +20,6 @@
               id="inputTitle"
               aria-describedby="emailHelp"
               placeholder="What is your item name"
-              required
               v-model="name"
             />
           </div>
@@ -38,7 +37,6 @@
                 class="form-control custom-input"
                 id="inputLocation"
                 placeholder="Indonesia"
-                required
                 v-model="countryName"
               />
             </div>
@@ -49,7 +47,6 @@
                 class="form-control custom-input"
                 id="inputLocation"
                 placeholder="Jakarta"
-                required
                 v-model="cityName"
               />
             </div>
@@ -61,7 +58,6 @@
               class="form-control custom-input"
               id="inputPrice"
               placeholder="1000"
-              required
               v-model="price"
             />
           </div>
@@ -142,7 +138,7 @@ export default {
       })
         .then(({ data }) => {
           this.name = ''
-          this.price = 0
+          this.price = 10000
           this.quantity = 1
           this.location = ''
           this.image = ''
@@ -152,10 +148,10 @@ export default {
         })
         .catch(err => {
           // this.errors = err.response.data.errors
-          err.response.data.errors.forEach(err => {
+          err.response.data.errors.forEach(error => {
             this.$toast.open({
               type: 'warning',
-              message: err,
+              message: error,
             })
           })
         })
@@ -183,11 +179,13 @@ input[type=number] {
   border-left: none;
   border-right: none;
   border-radius: 0;
+  background: none;
 }
 
 input:focus {
   outline: none !important;
   -webkit-box-shadow: none !important;
   box-shadow: none !important;
+  background: none !important;
 }
 </style>
