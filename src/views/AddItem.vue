@@ -104,14 +104,14 @@ export default {
     }
   },
   methods: {
-    decreaseNumber() {
+    decreaseNumber () {
       if (this.quantity <= 1 || !this.quantity) this.quantity = 1
       else this.quantity--
     },
-    increaseNumber() {
+    increaseNumber () {
       this.quantity++
     },
-    uploadFile(file) {
+    uploadFile (file) {
       console.log(file.file)
       this.file = file.file
     },
@@ -155,7 +155,7 @@ export default {
           err.response.data.errors.forEach(err => {
             this.$toast.open({
               type: 'warning',
-              message: err,
+              message: err
             })
           })
         })

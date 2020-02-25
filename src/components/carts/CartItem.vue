@@ -32,7 +32,7 @@
             class="card-text"
           >Quantity: {{cart.quantity}}</p>
           <p class="card-text">
-            <small class="text-muted">Last updated 3 mins ago</small>
+            <small class="text-muted">Last updated 1 mins ago</small>
           </p>
         </div>
       </div>
@@ -168,31 +168,35 @@ export default {
     },
     async handleXendit () {
       console.log('amount', this.cart.itemId.price * this.cart.quantity)
-      const invoice = await axios({
-        method: 'POST',
-        url: '/payment',
-        data: {
-          description: this.cart.itemId.name,
-          amount: this.cart.itemId.price * this.cart.quantity
-        },
-        headers: {
-          token: localStorage.getItem('token')
-        }
-      })
-      console.log(invoice.data)
-      const { data } = await axios({
-        method: 'PATCH',
-        url: `/carts/${this.cart._id}`,
-        data: {
-          invoiceId: invoice.data.id
-        },
-        headers: {
-          token: localStorage.getItem('token')
-        }
-      })
-      console.log(data)
-      window.open(invoice.data.invoice_url, '_blank')
-      this.$store.dispatch('refetchUserCart')
+      try {
+        const invoice = await axios({
+          method: 'POST',
+          url: '/payment',
+          data: {
+            description: this.cart.itemId.name,
+            amount: this.cart.itemId.price * this.cart.quantity
+          },
+          headers: {
+            token: localStorage.getItem('token')
+          }
+        })
+        console.log(invoice.data)
+        const { data } = await axios({
+          method: 'PATCH',
+          url: `/carts/${this.cart._id}`,
+          data: {
+            invoiceId: invoice.data.id
+          },
+          headers: {
+            token: localStorage.getItem('token')
+          }
+        })
+        console.log(data)
+        window.open(invoice.data.invoice_url, '_blank')
+        this.$store.dispatch('refetchUserCart')
+      } catch (error) {
+        console.log(error)
+      }
     },
     handlePurchase () {
       this.errors = []
@@ -200,7 +204,7 @@ export default {
         method: 'PATCH',
         url: `/carts/${this.cart._id}`,
         data: {
-          status: 'pending delivery'
+          status: 'pending verification'
         },
         headers: {
           token: localStorage.getItem('token')

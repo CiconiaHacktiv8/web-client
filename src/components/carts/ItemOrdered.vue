@@ -1,30 +1,32 @@
 <template>
-  <div class="card my-1" style="width: 100%">
-    <div v-for="(error, i) in errors" :key="i" class="alert alert-danger text-center" role="alert">
-      {{error}}
-    </div>
+  <div class="card my-1 shadow" style="width: 100%; border-bottom-left-radius: 50px; border-top-right-radius: 50px;">
     <div class="row no-gutters">
-      <div class="col-md-2 d-flex align-items-center">
+      <div class="col-md-4">
         <img
           :src="cart.itemId.image"
-          class="card-img d-flex"
-          width="100px"
-          height="100px"
+          class="card-img img-fluid"
           alt="picsum"
         />
       </div>
-      <div class="col-md-8">
+      <div class="col-md-6">
         <div class="card-body">
-          <!-- <h5 class="card-title">{{cart.itemId.name}}</h5> -->
+          <h5 class="card-title">{{cart.itemId.name}}</h5>
           <p
             class="card-text"
-          >Location From: {{cart.travelId.locationFrom}} </p>
+          >Item Origin: {{cart.travelId.locationFrom}}</p>
           <p
             class="card-text"
-          >Quantity: {{cart.quantity}} </p>
+          >Destination: {{cart.travelId.locationTo}}</p>
+          <p
+            v-if="cart.status !== 'offered'"
+            class="card-text"
+          >Price per item: {{cart.itemId.price}}</p>
           <p
             class="card-text"
-          >Departure: {{localeTime}} </p>
+          >Quantity: {{cart.quantity}}</p>
+          <p class="card-text">
+            <small class="text-muted">waiting for traveler to accept your request</small>
+          </p>
         </div>
       </div>
     </div>

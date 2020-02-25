@@ -74,14 +74,14 @@ export default {
     }
   },
   methods: {
-    decreaseNumber() {
+    decreaseNumber () {
       if (this.quantity <= 1 || !this.quantity) this.quantity = 1
       else this.quantity--
     },
-    increaseNumber() {
+    increaseNumber () {
       this.quantity++
     },
-    uploadFile(file) {
+    uploadFile (file) {
       this.file = file.file
     },
     handleSubmit () {

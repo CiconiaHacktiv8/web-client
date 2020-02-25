@@ -1,18 +1,14 @@
 <template>
-  <b-navbar variant="primary" type="dark" fixed="top" id="custom-nav">
-    <b-navbar-brand to="/">
-      <img src="https://i.postimg.cc/hGVCbznv/white-Asset-2.png" width="30" class="d-inline-block align-top" alt="Kitten">
-      Ciconia
+  <b-navbar variant="primary" type="dark" fixed="top" id="custom-nav" class="shadow">
+    <b-navbar-brand to="/" style="position: relative">
+      <div style="overflow: hidden; position: relative">
+        <img src="https://i.postimg.cc/hGVCbznv/white-Asset-2.png" width="120" class="d-inline-block align-top" alt="Kitten" style="position: relative; top: -8px">
+        <span style="position: relative; top: 25px; font-size: 3rem">Ciconia</span>
+      </div>
     </b-navbar-brand>
     <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
     <b-collapse id="nav-collapse" is-nav>
-      <b-navbar-nav class="mr-auto">
-        <!-- <b-nav-form>
-          <b-form-input size="sm" class="mr-sm-2" placeholder="Search"></b-form-input>
-          <b-button size="sm" class="my-2 my-sm-0" type="submit">Search</b-button>
-        </b-nav-form> -->
-      </b-navbar-nav>
-      <b-navbar-nav>
+      <b-navbar-nav class="ml-auto mr-auto">
         <div class="d-flex justify-content-center align-items-center mx-2">
           <span style="font-size: 1.2rem" class="d-flex" v-if="$store.state.user.name" >Welcome, {{$store.state.user.name}}</span>
         </div>
@@ -24,7 +20,7 @@
         <span @click="toCart" style="position: absolute; z-index: 9999; bottom: -60px; right: 350px; color: white; background-color: #f77d25; font-size: 2em; padding: 0 15px; border-radius: 100px" class="shadow"><i class="fa fa-shopping-cart"></i></span>
         <span @click="showModal" style="position: absolute; z-index: 9999; bottom: -60px; right: 250px; color: white; background-color: #f77d25; font-size: 2em; padding: 0 15px; border-radius: 100px" class="shadow"><i class="fa fa-plus"></i></span>
         <span @click="showUser" style="position: absolute; z-index: 9999; bottom: -60px; right: 150px; color: white; background-color: #f77d25; font-size: 2em; padding: 0 15px; border-radius: 100px" class="shadow"><i class="fa fa-user"></i></span>
-        <b-badge v-if="showNotif" variant="danger" style="position: absolute; z-index: 9999; bottom: -20px; right: 345px; border-radius: 10px; font-size: 1em">{{notification}}</b-badge>
+        <b-badge v-if="$store.state.showNotif" variant="danger" style="position: absolute; z-index: 9999; bottom: -20px; right: 345px; border-radius: 10px; font-size: 1em">{{notification}}</b-badge>
         <!-- <b-nav-item-dropdown right> -->
           <!-- <template v-slot:button-content>
             <b-button size="sm" class="my-2 my-sm-0" type="submit">Add</b-button>
@@ -90,7 +86,8 @@ export default {
       this.$bvModal.show('user')
     },
     toCart () {
-      this.showNotif = false
+      // this.showNotif = false
+      this.$store.commit('HIDE_NOTIF')
       this.$router.push('/cart')
     },
     showModal () {

@@ -11,6 +11,7 @@ export default new Vuex.Store({
       point: 0,
       name: ''
     },
+    showNotif: true,
     isLogin: false,
     isLoading: false,
     itemList: [],
@@ -41,6 +42,12 @@ export default new Vuex.Store({
     SET_USER (state, payload) {
       state.user = payload
     },
+    SHOW_NOTIF (state) {
+      state.showNotif = true
+    },
+    HIDE_NOTIF (state) {
+      state.showNotif = false
+    },
     LOGIN (state) {
       state.isLogin = true
     },
@@ -54,10 +61,10 @@ export default new Vuex.Store({
       state.isLoading = false
     },
     FETCH_ITEM_LIST (state, payload) {
-      state.itemList = payload
+      state.itemList = payload.reverse()
     },
     FETCH_TRAVEL_LIST (state, payload) {
-      state.travelList = payload
+      state.travelList = payload.reverse()
     },
     FETCH_ITEM_DETAIL (state, payload) {
       state.itemDetail = payload
@@ -224,6 +231,7 @@ export default new Vuex.Store({
         })
           .then(({ data }) => {
             context.commit('LOADING_FINISH')
+            console.log('FETCH ITEM TO BUY INVOKED', data)
             context.commit('SET_ITEM_TO_BUY', data)
             resolve()
           })

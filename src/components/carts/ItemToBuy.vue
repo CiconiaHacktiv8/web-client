@@ -1,24 +1,31 @@
 <template>
-  <div class="card my-1" style="width: 100%">
-    <div v-for="(error, i) in errors" :key="i" class="alert alert-danger text-center" role="alert">
-      {{error}}
-    </div>
+  <div class="card my-1 shadow" style="width: 100%; border-bottom-left-radius: 50px; border-top-right-radius: 50px;">
     <div class="row no-gutters">
-      <div class="col-md-2 d-flex align-items-center">
+      <div class="col-md-4">
         <img
-          src="https://picsum.photos/600/300/?image=525"
-          class="card-img img-fluid d-flex"
+          :src="cart.itemId.image"
+          class="card-img img-fluid"
           alt="picsum"
         />
       </div>
-      <div class="col-md-8">
+      <div class="col-md-6">
         <div class="card-body">
           <h5 class="card-title">{{cart.itemId.name}}</h5>
           <p
             class="card-text"
-          >This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+          >Item Origin: {{cart.travelId.locationFrom}}</p>
+          <p
+            class="card-text"
+          >Destination: {{cart.travelId.locationTo}}</p>
+          <p
+            v-if="cart.status !== 'offered'"
+            class="card-text"
+          >Price per item: {{cart.itemId.price}}</p>
+          <p
+            class="card-text"
+          >Quantity: {{cart.quantity}}</p>
           <p class="card-text">
-            <small class="text-muted">You need to open app to verify purchase</small>
+            <small class="text-muted">waiting for traveler to accept your request</small>
           </p>
         </div>
       </div>
