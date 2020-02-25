@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <div class="card" style="width: 100%">
+    <div class="card mt-5 shadow" style="width: 100%; border-bottom-left-radius: 50px; border-top-right-radius: 50px">
       <div class="row no-gutters">
         <div class="col-md-3 d-flex align-items-center justify-content-center">
           <div class="d-flex">
@@ -11,7 +11,7 @@
           <div class="card-body text-center">
             <h5 class="card-title">Traveller name: {{$store.state.travelDetail.userId.name}}</h5>
             <div class="d-flex justify-content-center">
-            <h5 class="card-title">Itinerary :</h5>
+            <h5 class="card-title">Travel Detail :</h5>
             <span class="d-flex card-text m-4">From: {{$store.state.travelDetail.locationFrom}}</span> <span class="d-flex card-text m-4">To: {{$store.state.travelDetail.locationTo}}</span>
             </div>
             <p class="card-text"><small class="text-muted">Departure: {{localeTime}}</small></p>
@@ -48,5 +48,7 @@ export default {
 </script>
 
 <style>
-
+.test {
+  border-bottom-right-radius: 5em
+}
 </style>

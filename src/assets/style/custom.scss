@@ -5,3 +5,21 @@ $theme-colors: (
 
 @import "node_modules/bootstrap/scss/bootstrap";
 @import "node_modules/bootstrap-vue/src/index.scss";
+
+.btn-ciconia {
+  border-radius: 100px;
+  padding: .5em 2em;
+  font-weight: bold;
+}
+
+.btn-flow {
+  border-radius: 100px;
+  margin: 1em 0;
+  padding: 1em;
+  color: white !important;
+  text-align: center;
+  font-weight: bold;
+  // font-size: large;
+  background-color: #f77d25;
+  border: 0
+}

@@ -1,6 +1,6 @@
 <template>
-  <div class="container">
-    <div class="card" style="width: 100%">
+  <div class="container" style="padding-top: 15vh">
+    <div class="card shadow" style="width: 100%; border-radius: 100px">
       <div class="row no-gutters">
         <div class="col-md-6 d-flex align-items-center">
           <img :src="item.image" class="card-img img-fluid d-flex" alt="picsum">
@@ -13,11 +13,11 @@
             <h5 class="card-title">{{$store.state.itemDetail.name}}</h5>
             <br>
             <div class="ml-5">
-              <p class="card-text">Price: {{$store.state.itemDetail.price}}</p>
+              <p class="card-text">Price per item: {{$store.state.itemDetail.price}}</p>
               <p class="card-text">Quantity: {{$store.state.itemDetail.quantity}}</p>
               <p class="card-text">Status: {{$store.state.itemDetail.status}}</p>
               <p class="card-text"><small class="text-muted">Location: {{$store.state.itemDetail.location}}</small></p>
-              <p class="card-text"><small class="text-muted">Traveler Departure: if status travel</small></p>
+              <!-- <p v-if="$store.state.itemDetail.status === 'travel'" class="card-text"><small class="text-muted">Traveler Departure: {{localeTime}}</small></p> -->
             </div>
             <br>
             <a v-if="showOffer" v-b-modal.offer class="btn btn-primary mx-3">Offer Help</a>
@@ -67,6 +67,7 @@
 
 <script>
 import axios from '../config/api'
+import moment from 'moment'
 export default {
   name: 'DetailItem',
   data () {
@@ -77,6 +78,11 @@ export default {
     }
   },
   computed: {
+    localeTime () {
+      return this.$store.state.itemDetail.travelId.departure
+        ? moment(this.$store.state.itemDetail.travelId.departure).format('D MMM YYYY')
+        : new Date().toLocaleString()
+    },
     item () {
       return this.$store.state.itemDetail
     },

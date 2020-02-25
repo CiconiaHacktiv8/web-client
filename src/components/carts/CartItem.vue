@@ -1,14 +1,14 @@
 <template>
-  <div class="card my-1" style="width: 100%">
+  <div class="card my-1 shadow" style="width: 100%; border-bottom-left-radius: 50px; border-top-right-radius: 50px;">
     <div class="row no-gutters">
-      <div class="col-md-2 d-flex align-items-center">
+      <div class="col-md-4">
         <img
           :src="cart.itemId.image"
-          class="card-img img-fluid d-flex"
+          class="card-img img-fluid"
           alt="picsum"
         />
       </div>
-      <div class="col-md-8">
+      <div class="col-md-6">
         <div v-for="(error, i) in errors" :key="i" class="alert alert-danger text-center" role="alert">
           {{error}}
         </div>
@@ -23,15 +23,11 @@
           <p
             v-if="cart.status === 'offered'"
             class="card-text"
-          >Your Assigned Price: </p>
-          <p
-            v-if="cart.status === 'offered'"
-            class="card-text"
           >Offered Price: </p>
           <p
             v-if="cart.status !== 'offered'"
             class="card-text"
-          >Fixed Price: {{cart.itemId.price}}</p>
+          >Price per item: {{cart.itemId.price}}</p>
           <p
             class="card-text"
           >Quantity: {{cart.quantity}}</p>
@@ -41,18 +37,18 @@
         </div>
       </div>
       <div v-if="cart.status === 'pending delivery'" class="col-md-2 d-flex flex-column justify-content-center align-items-center">
-        <a v-b-modal.confirm class="btn btn-primary my-1">Confirm</a>
+        <a v-b-modal.confirm class="btn btn-primary btn-ciconia my-1">Confirm</a>
       </div>
       <div v-if="cart.status === 'pending purchase'" class="col-md-2 d-flex flex-column justify-content-center align-items-center">
-        <a v-if="!cart.invoiceId" @click="handleXendit" class="btn btn-primary my-1">Purchase</a>
-        <span v-if="cart.invoiceId">waiting payment..</span><a v-if="cart.invoiceId" @click="handleRecheck" class="btn btn-primary my-1 mx-2">Recheck?</a>
+        <a v-if="!cart.invoiceId" @click="handleXendit" class="btn btn-primary btn-ciconia my-1">Purchase</a>
+        <span v-if="cart.invoiceId">waiting payment..</span><a v-if="cart.invoiceId" @click="handleRecheck" class="btn btn-primary btn-ciconia my-1 mx-2">Recheck?</a>
       </div>
       <div v-if="cart.status === 'offered'" class="col-md-2 d-flex flex-column justify-content-center align-items-center">
-        <a @click="handleOffer" class="btn btn-primary my-1">Accept Offer</a>
-        <a @click="handleReject" class="btn btn-primary my-1">Reject</a>
+        <a @click="handleOffer" class="btn btn-primary btn-ciconia my-1">Accept Offer</a>
+        <a @click="handleReject" class="btn btn-primary btn-ciconia my-1">Reject</a>
       </div>
       <div v-if="cart.status === 'open'" class="col-md-2 d-flex flex-column justify-content-center align-items-center">
-        <a @click="handleAccept" class="btn btn-primary my-1">Accept</a>
+        <a @click="handleAccept" class="btn btn-primary btn-ciconia my-1">Accept</a>
       </div>
     </div>
     <b-modal id="confirm" title="Confirm Delivery" hide-footer>
@@ -62,7 +58,7 @@
           <p>make sure the item is correct and in a good shape</p>
         </div>
         <div class="text-center form-group">
-          <b-button type="submit" class="btn btn-primary">Confirm</b-button>
+          <b-button type="submit" class="btn btn-primary btn-ciconia">Confirm</b-button>
         </div>
       </form>
     </b-modal>
@@ -72,7 +68,7 @@
           <label for="purchase">Total Purchase: {{cart.quantity * cart.itemId.price}}</label>
         </div>
         <div class="text-center form-group">
-          <b-button type="submit" class="btn btn-primary">Purchase</b-button>
+          <b-button type="submit" class="btn btn-primary btn-ciconia">Purchase</b-button>
         </div>
       </form>
     </b-modal>
@@ -171,6 +167,7 @@ export default {
         })
     },
     async handleXendit () {
+      console.log('amount', this.cart.itemId.price * this.cart.quantity)
       const invoice = await axios({
         method: 'POST',
         url: '/payment',
@@ -245,4 +242,7 @@ export default {
 </script>
 
 <style>
+.test {
+  border-bottom-left-radius: 25px
+}
 </style>
