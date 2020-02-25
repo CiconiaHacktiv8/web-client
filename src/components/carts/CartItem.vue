@@ -36,8 +36,11 @@
           </p>
         </div>
       </div>
+      <div v-if="cart.status === 'pending verification'" class="col-md-2 d-flex flex-column justify-content-center align-items-center">
+        <a class="btn disabled btn-primary btn-ciconia my-1">Verification...</a>
+      </div>
       <div v-if="cart.status === 'pending delivery'" class="col-md-2 d-flex flex-column justify-content-center align-items-center">
-        <a v-b-modal.confirm class="btn btn-primary btn-ciconia my-1">Confirm</a>
+        <a @click="handleDelivered" class="btn btn-primary btn-ciconia my-1">Confirm</a>
       </div>
       <div v-if="cart.status === 'pending purchase'" class="col-md-2 d-flex flex-column justify-content-center align-items-center">
         <a v-if="!cart.invoiceId" @click="handleXendit" class="btn btn-primary btn-ciconia my-1">Purchase</a>
@@ -51,7 +54,7 @@
         <a @click="handleAccept" class="btn btn-primary btn-ciconia my-1">Accept</a>
       </div>
     </div>
-    <b-modal id="confirm" title="Confirm Delivery" hide-footer>
+    <b-modal :id="cart._id" title="Confirm Delivery" hide-footer>
       <form @submit.prevent="handleConfirm">
         <div class="form-group">
           <p>Are You Sure? </p>
@@ -88,6 +91,9 @@ export default {
     cart: Object
   },
   methods: {
+    handleDelivered () {
+      this.$bvModal.show(this.cart._id)
+    },
     handleAccept () {
       this.errors = []
       axios({
@@ -108,7 +114,6 @@ export default {
         })
     },
     handleOffer () {
-      console.log('handle accept')
       axios({
         method: 'PATCH',
         url: `/carts/${this.cart._id}`,
@@ -120,7 +125,6 @@ export default {
         }
       })
         .then(({ data }) => {
-          console.log('ofer accepted')
           this.$store.dispatch('fetchUserCart')
         })
         .catch(err => {
@@ -128,7 +132,6 @@ export default {
         })
     },
     handleReject () {
-      console.log('handle reject')
       axios({
         method: 'PATCH',
         url: `/carts/${this.cart._id}`,
@@ -140,7 +143,6 @@ export default {
         }
       })
         .then(({ data }) => {
-          console.log('ofer rejected')
           this.$store.dispatch('fetchUserCart')
         })
         .catch(err => {
@@ -167,7 +169,6 @@ export default {
         })
     },
     async handleXendit () {
-      console.log('amount', this.cart.itemId.price * this.cart.quantity)
       try {
         const invoice = await axios({
           method: 'POST',
@@ -180,8 +181,7 @@ export default {
             token: localStorage.getItem('token')
           }
         })
-        console.log(invoice.data)
-        const { data } = await axios({
+        await axios({
           method: 'PATCH',
           url: `/carts/${this.cart._id}`,
           data: {
@@ -191,11 +191,9 @@ export default {
             token: localStorage.getItem('token')
           }
         })
-        console.log(data)
         window.open(invoice.data.invoice_url, '_blank')
         this.$store.dispatch('refetchUserCart')
       } catch (error) {
-        console.log(error)
       }
     },
     handlePurchase () {

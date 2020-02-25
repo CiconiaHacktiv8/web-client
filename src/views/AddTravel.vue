@@ -14,23 +14,23 @@
               <div class="form-group">
                 <label for="inputDeparture" class="font-weight-bold" style="font-size: 1.50rem;">Depart</label>
                 <div class="d-block">
-                  <label for="inputLocation" style="font-size: 1.rem;">Name</label>
+                  <label for="inputLocation" style="font-size: 1.rem;">Country</label>
                   <input
                     type="text"
                     class="form-control custom-input"
                     id="inputLocation"
                     placeholder="Thailand"
-                    v-model="countryName"
+                    v-model="countryNameFrom"
                   />
                 </div>
                 <div class="d-block mt-2">
-                  <label for="inputLocation" style="font-size: 1.rem;">City Name</label>
+                  <label for="inputLocation" style="font-size: 1.rem;">City</label>
                   <input
                     type="text"
                     class="form-control custom-input"
                     id="inputLocation"
                     placeholder="Phuket"
-                    v-model="cityName"
+                    v-model="cityNameFrom"
                   />
                 </div>
               </div>
@@ -40,23 +40,23 @@
               <div class="form-group">
                 <label for="inputDeparture" class="font-weight-bold" style="font-size: 1.50rem;">Arrive</label>
                 <div class="d-block">
-                  <label for="inputLocation" style="font-size: 1.rem;">Name</label>
+                  <label for="inputLocation" style="font-size: 1.rem;">Country</label>
                   <input
                     type="text"
                     class="form-control custom-input"
                     id="inputLocation"
                     placeholder="Indonesia"
-                    v-model="countryName"
+                    v-model="countryNameTo"
                   />
                 </div>
                 <div class="d-block mt-2">
-                  <label for="inputLocation" style="font-size: 1.rem;">City Name</label>
+                  <label for="inputLocation" style="font-size: 1.rem;">City</label>
                   <input
                     type="text"
                     class="form-control custom-input"
                     id="inputLocation"
                     placeholder="Jakarta"
-                    v-model="cityName"
+                    v-model="cityNameTo"
                   />
                 </div>
               </div>
@@ -88,7 +88,11 @@ export default {
       min: minDate,
       errors: [],
       locationFrom: '',
-      locationTo: ''
+      locationTo: '',
+      countryNameFrom: '',
+      cityNameFrom: '',
+      countryNameTo: '',
+      cityNameTo: ''
     }
   },
   methods: {
@@ -98,8 +102,8 @@ export default {
         method: 'POST',
         url: '/travels',
         data: {
-          locationFrom: this.locationFrom,
-          locationTo: this.locationTo,
+          locationFrom: `${this.cityNameFrom}, ${this.countryNameFrom}`,
+          locationTo: `${this.cityNameTo}, ${this.countryNameTo}`,
           departure: this.date
         },
         headers: {
@@ -108,8 +112,10 @@ export default {
       })
         .then(({ data }) => {
           this.date = ''
-          this.locationFrom = ''
-          this.locationTo = ''
+          this.cityNameFrom = ''
+          this.cityNameTo = ''
+          this.countryNameFrom = ''
+          this.countryNameTo = ''
           this.$store.dispatch('fetchItemList')
           this.$store.dispatch('fetchTravelList')
           this.$router.push('/')

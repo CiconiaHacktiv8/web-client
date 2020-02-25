@@ -9,9 +9,9 @@ import VueToast from 'vue-toast-notification'
 
 import 'vue-toast-notification/dist/index.css'
 
-Vue.use(VueToast, { position: "top" });
-Vue.use(BootstrapVue);
-Vue.use(VueImageChooser);
+Vue.use(VueToast, { position: 'top' })
+Vue.use(BootstrapVue)
+Vue.use(VueImageChooser)
 
 Vue.config.productionTip = false
 

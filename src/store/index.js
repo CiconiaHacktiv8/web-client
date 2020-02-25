@@ -180,7 +180,6 @@ export default new Vuex.Store({
           .then(({ data }) => {
             context.commit('LOADING_FINISH')
             context.commit('FETCH_USER_CART', data)
-            console.log('FETCH cart success', data)
             context.commit('SET_OPEN_CART', data.open)
             context.commit('SET_OFFERED_CART', data.offered)
             context.commit('SET_PURCHASE_CART', data.pendingPurchase)
@@ -206,7 +205,6 @@ export default new Vuex.Store({
           .then(({ data }) => {
             context.commit('LOADING_FINISH')
             context.commit('FETCH_USER_CART', data)
-            console.log('REFETCH cart success', data)
             context.commit('SET_OPEN_CART', data.open)
             context.commit('SET_OFFERED_CART', data.offered)
             context.commit('SET_PURCHASE_CART', data.pendingPurchase)
@@ -231,7 +229,6 @@ export default new Vuex.Store({
         })
           .then(({ data }) => {
             context.commit('LOADING_FINISH')
-            console.log('FETCH ITEM TO BUY INVOKED', data)
             context.commit('SET_ITEM_TO_BUY', data)
             resolve()
           })

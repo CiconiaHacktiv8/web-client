@@ -108,7 +108,6 @@ export default {
       this.quantity++
     },
     uploadFile (file) {
-      console.log(file.file)
       this.file = file.file
     },
     handleSubmit () {
@@ -151,7 +150,7 @@ export default {
           err.response.data.errors.forEach(error => {
             this.$toast.open({
               type: 'warning',
-              message: error,
+              message: error
             })
           })
         })
