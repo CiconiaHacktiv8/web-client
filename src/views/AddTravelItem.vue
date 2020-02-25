@@ -1,78 +1,58 @@
 <template>
-  <div class="container">
-    <form @submit.prevent="handleSubmit">
-      <div class="text-center">
-        <h2>Post Your Item Pre-Order</h2>
-      </div>
-      <div v-for="(error, i) in errors" :key="i" class="alert alert-danger text-center" role="alert">
-        {{error}}
-      </div>
-      <div class="form-group">
-        <label for="inputTitle">Name of the item</label>
-        <input
-          type="text"
-          class="form-control"
-          id="inputTitle"
-          aria-describedby="emailHelp"
-          placeholder="Enter name"
-          required
-          v-model="name"
-        />
-      </div>
-      <div class="form-group">
-        <label for="inputPrice">Offered Price</label>
-        <input
-          type="number"
-          class="form-control"
-          id="inputPrice"
-          placeholder="1000"
-          required
-          v-model="price"
-        />
-      </div>
-      <div class="form-group">
-        <label for="quantity">Quantity</label>
-        <input
-          type="number"
-          class="form-control"
-          id="quantity"
-          placeholder="1000"
-          required
-          v-model="quantity"
-        />
-      </div>
-      <!-- <div class="form-group">
-        <label for="inputLocation">Location</label>
-        <input
-          type="text"
-          class="form-control"
-          id="inputLocation"
-          placeholder="Singapore, SG"
-          required
-          v-model="location"
-        />
-      </div> -->
-      <div class="form-group">
-        <label for="itemImage">Item image</label>
-        <b-form-file
-        id="itemImage"
-        v-model="file"
-        :state="Boolean(file)"
-        placeholder="Choose a file or drop it here..."
-        drop-placeholder="Drop file here..."
-      ></b-form-file>
-        <!-- <input
-            type="text"
-            class="form-control"
-            id="itemImage"
-            placeholder="Url Image"
-            v-model="image"
-          /> -->
-      </div>
-      <div class="text-center form-group">
-        <button type="submit" class="btn btn-primary">Post</button>
-      </div>
-    </form>
+  <div class="container" style="margin-top: -75px;">
+    <div class="d-flex justify-content-center align-items-center vh-100">
+      <form @submit.prevent="handleSubmit" class="bg-light shadow-lg" style="border-radius: 20px; width: 50rem; background: rgb(0,212,255);background: linear-gradient(18deg, rgba(0,212,255,1) 0%, rgba(255,255,255,1) 53%);">
+        <div class="text-center bg-primary py-3 text-light mb-3" style="border-radius: 20px 20px 0 0;">
+          <h2>Post Your Pre-Order Item </h2>
+        </div>
+        <div v-for="(error, i) in errors" :key="i" class="alert alert-danger text-center" role="alert">
+          {{error}}
+        </div>
+        <div class="row px-5">
+          <div class="col d-flex align-items-center">
+            <div class="w-100">
+              <div class="form-group">
+                <label for="inputTitle" style="font-size: 1.50rem;" class="font-weight-bold">Name</label>
+                <input
+                  type="text"
+                  class="form-control custom-input"
+                  id="inputTitle"
+                  aria-describedby="emailHelp"
+                  placeholder="What is your item name"
+                  v-model="name"
+                />
+              </div>
+              <label for="quantity" style="font-size: 1rem;">Quantity</label>
+              <div class="d-block">
+              <button class="border border-danger bg-light rounded-circle" @click="decreaseNumber" type="button" style="color: red; width: 25px; height: 25px;">-</button>
+              <input type="number" class="custom-input text-center mx-2" style="width: 5rem;" v-model="quantity" />
+              <button type="button" class="border border-success bg-light rounded-circle mb-4" @click="increaseNumber" style="color: green; width: 25px; height: 25px;">+</button>
+              </div>
+              <div>
+              </div>
+              <div class="form-group">
+                <label for="inputPrice" style="font-size: 1.50rem;" class="font-weight-bold">Offered Price</label>
+                <input
+                  type="number"
+                  class="form-control custom-input"
+                  id="inputPrice"
+                  placeholder="1000"
+                  v-model="price"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group">
+              <vue-image-chooser name="image-chooser" @change="uploadFile" :progress="imageProgress" :error="error" />
+            </div>
+          </div>
+        </div>
+        <div class="text-center form-group">
+          <button type="submit" class="btn btn-primary my-3 rounded-pill px-3" style="font-size: 1.25rem;">Post Pre-Order Item</button>
+        </div>
+      </form>
+    </div>
   </div>
 </template>
 
@@ -85,13 +65,25 @@ export default {
       errors: [],
       file: null,
       name: '',
-      price: 0,
+      price: null,
       quantity: 1,
       location: '',
-      image: ''
+      image: '',
+      imageProgress: null,
+      error: ''
     }
   },
   methods: {
+    decreaseNumber() {
+      if (this.quantity <= 1 || !this.quantity) this.quantity = 1
+      else this.quantity--
+    },
+    increaseNumber() {
+      this.quantity++
+    },
+    uploadFile(file) {
+      this.file = file.file
+    },
     handleSubmit () {
       this.errors = []
       const formData = new FormData()
@@ -135,4 +127,31 @@ export default {
 </script>
 
 <style>
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance:textfield;
+}
+
+.custom-input {
+  border-bottom: 1px solid gray;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-radius: 0;
+  background: none;
+}
+
+input:focus {
+  outline: none !important;
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
+  background: none !important;
+}
 </style>

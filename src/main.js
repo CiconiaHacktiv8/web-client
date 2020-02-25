@@ -1,16 +1,22 @@
-import Vue from 'vue'
-import App from './App.vue'
-import router from './router'
-import store from './store'
-import { BootstrapVue } from 'bootstrap-vue'
-import './assets/style/custom.scss'
+import Vue from "vue";
+import App from "./App.vue";
+import router from "./router";
+import store from "./store";
+import { BootstrapVue } from "bootstrap-vue";
+import "./assets/style/custom.scss";
+import VueImageChooser from "vue-image-chooser";
+import VueToast from "vue-toast-notification";
 
-Vue.use(BootstrapVue)
+import "vue-toast-notification/dist/index.css";
 
-Vue.config.productionTip = false
+Vue.use(VueToast, { position: "top-right" });
+Vue.use(BootstrapVue);
+Vue.use(VueImageChooser);
+
+Vue.config.productionTip = false;
 
 new Vue({
   router,
   store,
   render: h => h(App)
-}).$mount('#app')
+}).$mount("#app");
