@@ -1,13 +1,13 @@
 <template>
   <div class="container" style="margin-top: -75px;">
     <div class="d-flex justify-content-center align-items-center vh-100">
-      <form @submit.prevent="handleSubmit" class="bg-light shadow-lg" style="border-radius: 20px; width: 50rem; background: rgb(0,212,255);background: linear-gradient(18deg, rgba(0,212,255,1) 0%, rgba(255,255,255,1) 53%);">
+      <form @submit.prevent="handleSubmit" class="bg-light shadow-lg" style="border-radius: 20px; width: 50rem;background: rgb(40,170,225); background: linear-gradient(180deg, rgba(40,170,225,1) 0%, rgba(206,235,248,1) 0%, rgba(222,241,250,1) 40%, rgba(255,255,255,1) 100%);">
         <div class="text-center bg-primary py-3 text-light mb-3" style="border-radius: 20px 20px 0 0;">
           <h2>Post Your Pre-Order Item </h2>
         </div>
-        <div v-for="(error, i) in errors" :key="i" class="alert alert-danger text-center" role="alert">
+        <!-- <div v-for="(error, i) in errors" :key="i" class="alert alert-danger text-center" role="alert">
           {{error}}
-        </div>
+        </div> -->
         <div class="row px-5">
           <div class="col d-flex align-items-center">
             <div class="w-100">
@@ -65,7 +65,7 @@ export default {
       errors: [],
       file: null,
       name: '',
-      price: null,
+      price: 10000,
       quantity: 1,
       location: '',
       image: '',
@@ -119,7 +119,13 @@ export default {
           this.$router.push('/')
         })
         .catch(err => {
-          this.errors = err.response.data.errors
+          // this.errors = err.response.data.errors
+          err.response.data.errors.forEach(error => {
+            this.$toast.open({
+              type: 'warning',
+              message: error
+            })
+          })
         })
     }
   }
