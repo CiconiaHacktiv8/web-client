@@ -18,9 +18,9 @@
             class="card-text"
           >Destination: {{cart.travelId.locationTo}}</p>
           <p
-            v-if="cart.status !== 'offered'"
+            v-if="cart.status !== 'offered' && cart.itemId.price"
             class="card-text"
-          >Price per item: Rp. {{cart.itemId.price}},-</p>
+          >Price per item: Rp. {{localPrice}},-</p>
           <p
             class="card-text"
           >Quantity: {{cart.quantity}}</p>

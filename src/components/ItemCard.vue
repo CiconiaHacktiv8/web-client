@@ -9,7 +9,7 @@
       <h5 class="card-title text-capitalize">{{item.name}}</h5>
       <ul class="list-group list-group-flush">
         <li class="list-group-item text-capitalize">Location: {{item.location}}</li>
-        <li class="list-group-item">Rp. {{ localPrice }},-</li>
+        <li v-if="this.item.price" class="list-group-item">Rp. {{ localPrice }},-</li>
       </ul>
       <div class="m-2 p-2 text-center">
         <router-link :to="`/items/${item._id}`" class="btn btn-primary">View Detail</router-link>
