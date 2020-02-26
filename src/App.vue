@@ -1,6 +1,8 @@
 <template>
   <div id="app">
-    <router-view />
+    <transition name="fade" mode="out-in">
+      <router-view />
+    </transition>
   </div>
 </template>
 
@@ -19,5 +21,15 @@ export default {
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   background: -webkit-linear-gradient(bottom,#ade7ff,#ffffff)
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.3s;
+}
+
+.fade-enter,
+.fade-leave-to {
+  opacity: 0.3;
 }
 </style>

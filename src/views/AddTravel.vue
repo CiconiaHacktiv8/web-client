@@ -1,13 +1,13 @@
 <template>
-  <div class="container vld-parent" style="margin-top: -75px;">
-    <loading :active.sync="$store.state.isLoading"
-        :can-cancel="false"
+  <div class="vld-parent custom-body" style="margin-top: -75px;">
+    <loading :active.sync="$store.state.isLoading" 
+        :can-cancel="false" 
         :is-full-page="true"
         :color="'#f77d25'"
         :background-color="'#28aae1'"
         :opacity="0.3"
     ></loading>
-    <div class="d-flex justify-content-center align-items-center vh-100">
+    <div class="d-flex justify-content-center ml-5 align-items-center vh-100">
       <form @submit.prevent="handleSubmit" class="shadow-lg" style="border-radius: 20px; width: 50rem;background: rgb(40,170,225); background: linear-gradient(180deg, rgba(40,170,225,1) 0%, rgba(206,235,248,1) 0%, rgba(222,241,250,1) 40%, rgba(255,255,255,1) 100%);">
         <div class="text-center bg-primary py-3 mb-3" style="border-radius: 20px 20px 0 0">
           <h2 class="text-light">Post Your Travel Detail</h2>
@@ -149,5 +149,10 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+.custom-body {
+  background-image: url(../assets/add-item-travel.svg);
+  background-repeat: no-repeat;
+  background-position: bottom right;
+}
 </style>

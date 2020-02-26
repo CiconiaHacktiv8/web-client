@@ -1,13 +1,13 @@
 <template>
-  <div class="container vld-parent" style="margin-top: -75px;">
-    <loading :active.sync="$store.state.isLoading"
-        :can-cancel="false"
+  <div class="vld-parent custom-body" style="margin-top: -75px;">
+    <loading :active.sync="$store.state.isLoading" 
+        :can-cancel="false" 
         :is-full-page="true"
         :color="'#f77d25'"
         :background-color="'#28aae1'"
         :opacity="0.3"
     ></loading>
-    <div class="d-flex justify-content-center align-items-center vh-100">
+    <div class="d-flex justify-content-start ml-5 align-items-center vh-100">
       <form @submit.prevent="handleSubmit" class="bg-light shadow-lg" style="border-radius: 20px; width: 50rem;background: rgb(40,170,225); background: linear-gradient(180deg, rgba(40,170,225,1) 0%, rgba(206,235,248,1) 0%, rgba(222,241,250,1) 40%, rgba(255,255,255,1) 100%);">
         <div class="text-center bg-primary py-3 text-light mb-3" style="border-radius: 20px 20px 0 0;">
           <h2>Post Your Pre-Order Item </h2>
@@ -48,12 +48,12 @@
                   /> -->
               <div class="input-group mb-3">
                 <div class="input-group-prepend">
-                  <span class="input-group-text custom-input" id="basic-addon3">Rp.</span>
+                  <span class="input-group-text custom-input pr-0" id="basic-addon3">Rp.</span>
                 </div>
-                <input
-                  type="number"
-                  class="form-control custom-input"
-                  id="basic-url"
+                <input 
+                  type="number" 
+                  class="form-control custom-input pl-2" 
+                  id="basic-url" 
                   placeholder="10.000"
                   v-model="price"
                   aria-describedby="basic-addon3"
@@ -187,5 +187,11 @@ input:focus {
   -webkit-box-shadow: none !important;
   box-shadow: none !important;
   background: none !important;
+}
+
+.custom-body {
+  background-image: url(../assets/add-item-travel-2.svg);
+  background-repeat: no-repeat;
+  background-position: right bottom;
 }
 </style>

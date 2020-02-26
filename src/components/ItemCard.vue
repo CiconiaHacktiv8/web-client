@@ -1,16 +1,15 @@
 <template>
   <!-- <div class="card d-flex m-3" style="width: 18rem;"> -->
-  <div class="card shadow" style="width: 20rem; position: relative; overflow: hidden; border-bottom-left-radius: 50px">
+  <div class="card shadow custom-card" style="width: 20rem; position: relative; overflow: hidden; border-bottom-left-radius: 50px">
     <div v-if="item.status === 'travel'" class="corner-ribbon top-left sticky red shadow">Pre-Order</div>
     <div v-if="item.status !== 'travel'" class="corner-ribbon top-left sticky green shadow">Requested</div>
     <div :style="`height: 18rem; background-image: url('${item.image}'); background-repeat: no-repeat; background-size: cover`" class="image-container"></div>
     <!-- <img :src="item.image" class="card-img-top img-fluid" alt="picsum" /> -->
     <div class="card-body">
-      <h5 class="card-title">{{item.name}}</h5>
+      <h5 class="card-title text-capitalize">{{item.name}}</h5>
       <ul class="list-group list-group-flush">
-        <li class="list-group-item">Location: {{item.location}}</li>
-        <!-- <li class="list-group-item">Price: {{item.price}}</li> -->
-        <li v-if="item.price" class="list-group-item">Rp. {{ item.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.') }},-</li>
+        <li class="list-group-item text-capitalize">Location: {{item.location}}</li>
+        <li v-if="this.item.price" class="list-group-item">Rp. {{ localPrice }},-</li>
       </ul>
       <div class="m-2 p-2 text-center">
         <router-link :to="`/items/${item._id}`" class="btn btn-primary">View Detail</router-link>
@@ -29,7 +28,7 @@ export default {
     localPrice () {
       return this.item.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')
     }
-  }
+  },
 }
 </script>
 
@@ -111,4 +110,13 @@ export default {
 .corner-ribbon.red{background: #e43;}
 .corner-ribbon.orange{background: #e82;}
 .corner-ribbon.yellow{background: #ec0;}
+
+.custom-card {
+  cursor: pointer;
+  transition: transform .1s;
+}
+
+.custom-card:hover {
+  transform: scale(1.025);
+}
 </style>

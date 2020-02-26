@@ -68,7 +68,9 @@
         </b-nav>
       </div>
     <div class="col-lg-9 d-flex flex-column">-->
-    <router-view />
+      <transition name="fade" mode="out-in">
+      <router-view />
+    </transition>
     <!-- </div>
     </div>-->
   </div>
@@ -86,5 +88,15 @@ export default {
 <style scoped>
 .btn-flow {
   color: white !important;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.3s;
+}
+
+.fade-enter,
+.fade-leave-to {
+  opacity: 0.3;
 }
 </style>
