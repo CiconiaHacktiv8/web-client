@@ -3,8 +3,11 @@
     class="card border-primary"
     style="width: 18rem; display: inline-block; float: none; white-space: normal; margin: 5px"
   >
-    <div class="d-flex justify-content-center pt-2 bg-primary">
-      <img src="https://storage.cloud.google.com/images-bucket-arief/placeholder-user1.png" width="75" height="75" class="rounded-circle p-1 border bg-light">
+    <div class="d-flex justify-content-center pt-2 bg-primary text-center">
+      <div style="display: flex; background-color: brown; align-items: center; justify-content: center; width: 75px; height: 75px; border-radius: 50px; font-size: 2rem; font-weight: bold">
+        {{inital.toUpperCase()}}
+      </div>
+      <!-- <span style="width: 75px; height: 75px; background-color: brown; font-size: 3rem; border-radius: 75px; color: white; margin: auto">{{inital.toUpperCase()}}</span> -->
     </div>
     <div class="d-flex justify-content-center bg-primary">
       <h5 class="card-title pt-2 text-white">{{ travel.userId.name }}</h5>
@@ -36,9 +39,27 @@ export default {
       return this.travel.departure
         ? moment(this.travel.departure).format('D MMM YYYY')
         : new Date().toLocaleString()
+    },
+    inital () {
+      const splitName = this.travel.userId.name.split(' ')
+      return splitName.length && splitName.length > 1
+        ? `${splitName[0][0]}${splitName[1][0]}`
+        : `${splitName[0][0]}`
     }
   }
 }
 </script>
 
-<style></style>
+<style scoped>
+.inital {
+  width: 75;
+  height: 75;
+  background-color: brown;
+  align-items: center;
+  justify-content: center;
+  width: 75px;
+  height: 75px;
+  border-radius: 50px;
+  font-weight: bold
+}
+</style>

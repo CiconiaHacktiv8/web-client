@@ -6,7 +6,12 @@
 
 <script>
 export default {
-  name: 'App'
+  name: 'App',
+  sockets: {
+    fetchData: function () {
+      console.log('SOCKET INVOKED')
+    }
+  }
 }
 </script>
 

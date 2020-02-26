@@ -20,7 +20,7 @@
           <p
             v-if="cart.status !== 'offered'"
             class="card-text"
-          >Price per item: {{cart.itemId.price}}</p>
+          >Price per item: Rp. {{localPrice}},-</p>
           <p
             class="card-text"
           >Quantity: {{cart.quantity}}</p>
@@ -50,6 +50,9 @@ export default {
       return this.cart.travelId.departure
         ? moment(this.cart.travelId.departure).format('D MMM YYYY')
         : new Date().toLocaleString()
+    },
+    localPrice () {
+      return this.cart.itemId.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')
     }
   }
 }

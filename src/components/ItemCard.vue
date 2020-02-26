@@ -20,21 +20,16 @@
 </template>
 
 <script>
-import { Money } from 'v-money'
-
 export default {
   name: 'ItemCard',
   props: {
     item: Object
   },
   computed: {
-    localPrice() {
-      return this.item.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
+    localPrice () {
+      return this.item.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')
     }
-  },
-  components: {
-    Money
-  },
+  }
 }
 </script>
 

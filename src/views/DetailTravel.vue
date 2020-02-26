@@ -5,7 +5,11 @@
         <div class="col-md-3 d-flex align-items-center justify-content-center">
           <div class="d-flex">
             <router-link :to="`/users/${$store.state.travelDetail._id}`">
-              <img src="https://storage.cloud.google.com/images-bucket-arief/placeholder-user1.png" width="125" height="125" class="rounded-circle p-1 border bg-light img-fluid">
+              <div class="d-flex justify-content-center text-center">
+                <div style="display: flex; background-color: brown; align-items: center; justify-content: center; width: 75px; height: 75px; border-radius: 50px; font-size: 2rem; font-weight: bold">
+                  {{inital.toUpperCase()}}
+                </div>
+              </div>
             </router-link>
           </div>
         </div>
@@ -44,6 +48,12 @@ export default {
       return this.$store.state.travelDetail.departure
         ? moment(this.$store.state.travelDetail.departure).format('D MMM YYYY')
         : new Date().toLocaleString()
+    },
+    inital () {
+      const splitName = this.store.state.travelDetail.userId.name.split(' ')
+      return splitName.length && splitName.length > 1
+        ? `${splitName[0][0]}${splitName[1][0]}`
+        : `${splitName[0][0]}`
     }
   }
 }

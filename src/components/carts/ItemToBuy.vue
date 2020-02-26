@@ -20,12 +20,12 @@
           <p
             v-if="cart.status !== 'offered'"
             class="card-text"
-          >Price per item: {{cart.itemId.price}}</p>
+          >Price per item: Rp. {{localPrice}},-</p>
           <p
             class="card-text"
           >Quantity: {{cart.quantity}}</p>
           <p class="card-text">
-            <small class="text-muted">waiting for traveler to accept your request</small>
+            <small class="text-muted">You need to verify this purchase</small>
           </p>
         </div>
       </div>
@@ -43,6 +43,11 @@ export default {
   },
   props: {
     cart: Object
+  },
+  computed: {
+    localPrice () {
+      return this.cart.itemId.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')
+    }
   }
 }
 </script>

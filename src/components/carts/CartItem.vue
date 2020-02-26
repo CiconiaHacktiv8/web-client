@@ -27,7 +27,7 @@
           <p
             v-if="cart.status !== 'offered'"
             class="card-text"
-          >Price per item: {{cart.itemId.price}}</p>
+          >Price per item: Rp. {{localPrice}},-</p>
           <p
             class="card-text"
           >Quantity: {{cart.quantity}}</p>
@@ -85,6 +85,11 @@ export default {
   data () {
     return {
       errors: []
+    }
+  },
+  computed: {
+    localPrice () {
+      return this.cart.itemId.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')
     }
   },
   props: {
@@ -226,7 +231,7 @@ export default {
         }
       })
         .then(({ data }) => {
-          if (data.status === 'SETTLED') {
+          if (data.status === 'SETTLED' && this.cart.status === 'pending purchase') {
             this.handlePurchase()
           }
         })
