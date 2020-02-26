@@ -10,8 +10,13 @@
 export default {
   name: 'App',
   sockets: {
-    fetchData: function () {
-      console.log('SOCKET INVOKED')
+    'refetch-data': function () {
+      this.$store.dispatch('fetchItemList')
+      this.$store.commit('SHOW_NOTIF')
+      this.$store.dispatch('fetchTravelList')
+      this.$store.dispatch('fetchUserCart')
+      this.$store.dispatch('fetchItemToBuy')
+      this.$store.dispatch('fetchItemOrdered')
     }
   }
 }
