@@ -9,7 +9,8 @@
       <h5 class="card-title">{{item.name}}</h5>
       <ul class="list-group list-group-flush">
         <li class="list-group-item">Location: {{item.location}}</li>
-        <li class="list-group-item">Price: {{item.price}}</li>
+        <!-- <li class="list-group-item">Price: {{item.price}}</li> -->
+        <li class="list-group-item">Rp. {{ localPrice }},-</li>
       </ul>
       <div class="m-2 p-2 text-center">
         <router-link :to="`/items/${item._id}`" class="btn btn-primary">View Detail</router-link>
@@ -19,11 +20,21 @@
 </template>
 
 <script>
+import { Money } from 'v-money'
+
 export default {
   name: 'ItemCard',
   props: {
     item: Object
-  }
+  },
+  computed: {
+    localPrice() {
+      return this.item.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
+    }
+  },
+  components: {
+    Money
+  },
 }
 </script>
 
