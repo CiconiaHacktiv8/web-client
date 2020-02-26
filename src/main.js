@@ -16,7 +16,7 @@ Vue.use(VueImageChooser)
 
 // Vue.use(new VueSocketIO({
 //   debug: true,
-//   connection: 'https://ciconiaserver.amilhasbala.com',
+//   connection: 'http://35.197.153.118',
 //   vuex: {
 //     store,
 //     actionPrefix: 'SOCKET_',

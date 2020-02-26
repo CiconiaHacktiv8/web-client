@@ -10,7 +10,7 @@
       <ul class="list-group list-group-flush">
         <li class="list-group-item">Location: {{item.location}}</li>
         <!-- <li class="list-group-item">Price: {{item.price}}</li> -->
-        <li class="list-group-item">Rp. {{ localPrice }},-</li>
+        <li v-if="item.price" class="list-group-item">Rp. {{ item.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.') }},-</li>
       </ul>
       <div class="m-2 p-2 text-center">
         <router-link :to="`/items/${item._id}`" class="btn btn-primary">View Detail</router-link>
