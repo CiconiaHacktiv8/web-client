@@ -176,12 +176,11 @@ export default new Vuex.Store({
       return new Promise(function (resolve, reject) {
         axios({
           method: 'GET',
-          url: `/users/${payload}`
+          url: `/travels/${payload}`
         })
           .then(({ data }) => {
             context.commit('LOADING_FINISH')
-            console.log('FETCH USER SUCCESS', data)
-            context.commit('FETCH_USER_DETAIL', data)
+            context.commit('FETCH_USER_DETAIL', data.userId)
             resolve()
           })
           .catch(err => {
