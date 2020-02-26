@@ -50,7 +50,7 @@ export default {
         : new Date().toLocaleString()
     },
     inital () {
-      const splitName = this.store.state.travelDetail.userId.name.split(' ')
+      const splitName = this.$store.state.travelDetail.userId.name.split(' ')
       return splitName.length && splitName.length > 1
         ? `${splitName[0][0]}${splitName[1][0]}`
         : `${splitName[0][0]}`

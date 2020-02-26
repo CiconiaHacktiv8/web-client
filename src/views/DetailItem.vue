@@ -13,7 +13,7 @@
             <h5 class="card-title">{{$store.state.itemDetail.name}}</h5>
             <br>
             <div class="ml-5">
-              <p class="card-text">Price per item: {{$store.state.itemDetail.price}}</p>
+              <p class="card-text">Price per item: Rp. {{localPrice}},-</p>
               <p class="card-text">Quantity: {{$store.state.itemDetail.quantity}}</p>
               <p class="card-text">Status: {{$store.state.itemDetail.status}}</p>
               <p class="card-text"><small class="text-muted">Location: {{$store.state.itemDetail.location}}</small></p>
@@ -50,7 +50,7 @@
           <div v-for="(error, i) in errors" :key="i" class="alert alert-danger text-center" role="alert">
             {{error}}
           </div>
-          <p>user requested price: {{$store.state.itemDetail.price}}</p>
+          <p>user requested price: Rp. {{localPrice}},-</p>
           <label for="quantity">for how much?</label>
           <input
             type="number"
@@ -82,6 +82,9 @@ export default {
     }
   },
   computed: {
+    localPrice () {
+      return this.$store.state.itemDetail.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')
+    },
     localeTime () {
       return this.$store.state.itemDetail.travelId.departure
         ? moment(this.$store.state.itemDetail.travelId.departure).format('D MMM YYYY')
