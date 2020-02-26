@@ -1,7 +1,7 @@
 <template>
   <div class="vld-parent custom-body" style="margin-top: -75px;">
-    <loading :active.sync="$store.state.isLoading" 
-        :can-cancel="false" 
+    <loading :active.sync="$store.state.isLoading"
+        :can-cancel="false"
         :is-full-page="true"
         :color="'#f77d25'"
         :background-color="'#28aae1'"

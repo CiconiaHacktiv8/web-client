@@ -1,7 +1,7 @@
 <template>
   <div class="vld-parent custom-body" style="margin-top: -75px;">
-    <loading :active.sync="$store.state.isLoading" 
-        :can-cancel="false" 
+    <loading :active.sync="$store.state.isLoading"
+        :can-cancel="false"
         :is-full-page="true"
         :color="'#f77d25'"
         :background-color="'#28aae1'"
@@ -50,10 +50,10 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text custom-input pr-0" id="basic-addon3">Rp.</span>
                 </div>
-                <input 
-                  type="number" 
-                  class="form-control custom-input pl-2" 
-                  id="basic-url" 
+                <input
+                  type="number"
+                  class="form-control custom-input pl-2"
+                  id="basic-url"
                   placeholder="10.000"
                   v-model="price"
                   aria-describedby="basic-addon3"

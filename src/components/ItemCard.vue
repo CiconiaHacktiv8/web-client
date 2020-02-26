@@ -28,7 +28,7 @@ export default {
     localPrice () {
       return this.item.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')
     }
-  },
+  }
 }
 </script>
 
