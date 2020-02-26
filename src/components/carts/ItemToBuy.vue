@@ -20,7 +20,7 @@
           <p
             v-if="cart.status !== 'offered'"
             class="card-text"
-          >Price per item: Rp. {{localPrice}},-</p>
+          >Price per item: Rp. {{cart.itemId.price}},-</p>
           <p
             class="card-text"
           >Quantity: {{cart.quantity}}</p>
