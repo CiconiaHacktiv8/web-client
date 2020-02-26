@@ -30,6 +30,7 @@ export default new Vuex.Store({
       location: ''
     },
     travelDetail: { userId: { name: '' } },
+    userDetail: {},
     userCart: {},
     openCart: [],
     offeredCart: [],
@@ -92,6 +93,9 @@ export default new Vuex.Store({
     },
     SET_ITEM_ORDERED (state, payload) {
       state.itemOrdered = payload
+    },
+    FETCH_USER_DETAIL (state, payload) {
+      state.userDetail = payload
     }
   },
   actions: {
@@ -159,6 +163,25 @@ export default new Vuex.Store({
           .then(({ data }) => {
             context.commit('LOADING_FINISH')
             context.commit('FETCH_TRAVEL_DETAIL', data)
+            resolve()
+          })
+          .catch(err => {
+            context.commit('LOADING_FINISH')
+            reject(err)
+          })
+      })
+    },
+    fetchUserDetail (context, payload) {
+      context.commit('LOADING_START')
+      return new Promise(function (resolve, reject) {
+        axios({
+          method: 'GET',
+          url: `/users/${payload}`
+        })
+          .then(({ data }) => {
+            context.commit('LOADING_FINISH')
+            console.log('FETCH USER SUCCESS', data)
+            context.commit('FETCH_USER_DETAIL', data)
             resolve()
           })
           .catch(err => {

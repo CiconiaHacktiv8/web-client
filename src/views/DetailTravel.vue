@@ -4,7 +4,9 @@
       <div class="row no-gutters">
         <div class="col-md-3 d-flex align-items-center justify-content-center">
           <div class="d-flex">
-            <img src="https://storage.cloud.google.com/images-bucket-arief/placeholder-user1.png" width="125" height="125" class="rounded-circle p-1 border bg-light img-fluid">
+            <router-link :to="`/users/${$store.state.travelDetail.userId._id}`">
+              <img src="https://storage.cloud.google.com/images-bucket-arief/placeholder-user1.png" width="125" height="125" class="rounded-circle p-1 border bg-light img-fluid">
+            </router-link>
           </div>
         </div>
         <div class="col-md-9">
@@ -48,7 +50,4 @@ export default {
 </script>
 
 <style>
-.test {
-  border-bottom-right-radius: 5em
-}
 </style>
