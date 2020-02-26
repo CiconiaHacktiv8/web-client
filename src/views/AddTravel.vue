@@ -1,5 +1,12 @@
 <template>
-  <div class="container" style="margin-top: -75px;">
+  <div class="container vld-parent" style="margin-top: -75px;">
+    <loading :active.sync="$store.state.isLoading" 
+        :can-cancel="false" 
+        :is-full-page="true"
+        :color="'#f77d25'"
+        :background-color="'#28aae1'"
+        :opacity="0.3"
+    ></loading>
     <div class="d-flex justify-content-center align-items-center vh-100">
       <form @submit.prevent="handleSubmit" class="shadow-lg" style="border-radius: 20px; width: 50rem;background: rgb(40,170,225); background: linear-gradient(180deg, rgba(40,170,225,1) 0%, rgba(206,235,248,1) 0%, rgba(222,241,250,1) 40%, rgba(255,255,255,1) 100%);">
         <div class="text-center bg-primary py-3 mb-3" style="border-radius: 20px 20px 0 0">
@@ -77,6 +84,9 @@
 
 <script>
 import axios from '../config/api'
+import Loading from 'vue-loading-overlay';
+import 'vue-loading-overlay/dist/vue-loading.css';
+
 export default {
   name: 'AddTravel',
   data () {
@@ -95,8 +105,12 @@ export default {
       cityNameTo: ''
     }
   },
+  components: {
+    Loading
+  },
   methods: {
     handleSubmit () {
+      this.$store.commit('LOADING_START')
       this.errors = []
       axios({
         method: 'POST',
@@ -121,8 +135,15 @@ export default {
           this.$router.push('/')
         })
         .catch(err => {
-          this.errors = err.response.data.errors
+          // this.errors = err.response.data.errors
+          err.response.data.errors.forEach(error => {
+            this.$toast.open({
+              type: 'warning',
+              message: error
+            })
+          })
         })
+        .finally(() => this.$store.commit('LOADING_FINISH'))
     }
   }
 }
