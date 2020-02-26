@@ -1,7 +1,7 @@
 <template>
   <div class="container vld-parent" style="margin-top: -75px;">
-    <loading :active.sync="$store.state.isLoading" 
-        :can-cancel="false" 
+    <loading :active.sync="$store.state.isLoading"
+        :can-cancel="false"
         :is-full-page="true"
         :color="'#f77d25'"
         :background-color="'#28aae1'"
@@ -64,10 +64,10 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text custom-input" id="basic-addon3">Rp.</span>
                 </div>
-                <input 
-                  type="number" 
-                  class="form-control custom-input" 
-                  id="basic-url" 
+                <input
+                  type="number"
+                  class="form-control custom-input"
+                  id="basic-url"
                   placeholder="10.000"
                   v-model="price"
                   aria-describedby="basic-addon3"
@@ -96,8 +96,8 @@
 
 <script>
 import axios from '../config/api'
-import Loading from 'vue-loading-overlay';
-import 'vue-loading-overlay/dist/vue-loading.css';
+import Loading from 'vue-loading-overlay'
+import 'vue-loading-overlay/dist/vue-loading.css'
 
 export default {
   name: 'AddItem',

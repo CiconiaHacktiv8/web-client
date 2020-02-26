@@ -1,7 +1,7 @@
 <template>
   <div class="container vld-parent" style="margin-top: -75px;">
-    <loading :active.sync="$store.state.isLoading" 
-        :can-cancel="false" 
+    <loading :active.sync="$store.state.isLoading"
+        :can-cancel="false"
         :is-full-page="true"
         :color="'#f77d25'"
         :background-color="'#28aae1'"
@@ -84,8 +84,8 @@
 
 <script>
 import axios from '../config/api'
-import Loading from 'vue-loading-overlay';
-import 'vue-loading-overlay/dist/vue-loading.css';
+import Loading from 'vue-loading-overlay'
+import 'vue-loading-overlay/dist/vue-loading.css'
 
 export default {
   name: 'AddTravel',

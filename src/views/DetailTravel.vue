@@ -22,7 +22,7 @@
       </div>
     </div>
     <div class="container mt-5">
-      <h1 class="h3">Explore items you can request:</h1>
+      <h1 class="h3">Reccomended items you can request:</h1>
       <travel-item-list />
     </div>
   </div>
