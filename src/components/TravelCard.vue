@@ -4,7 +4,7 @@
     style="width: 18rem; display: inline-block; float: none; white-space: normal; margin: 5px"
   >
     <div class="d-flex justify-content-center pt-2 bg-primary text-center">
-      <div style="display: flex; background-color: brown; align-items: center; justify-content: center; width: 75px; height: 75px; border-radius: 50px; font-size: 2rem; font-weight: bold">
+      <div style="display: flex; background-color: #f77d25; align-items: center; justify-content: center; width: 75px; height: 75px; border-radius: 50px; font-size: 2rem; font-weight: bold" class="text-light">
         {{inital.toUpperCase()}}
       </div>
       <!-- <span style="width: 75px; height: 75px; background-color: brown; font-size: 3rem; border-radius: 75px; color: white; margin: auto">{{inital.toUpperCase()}}</span> -->
