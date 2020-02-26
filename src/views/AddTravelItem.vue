@@ -1,5 +1,12 @@
 <template>
-  <div class="container" style="margin-top: -75px;">
+  <div class="container vld-parent" style="margin-top: -75px;">
+    <loading :active.sync="$store.state.isLoading" 
+        :can-cancel="false" 
+        :is-full-page="true"
+        :color="'#f77d25'"
+        :background-color="'#28aae1'"
+        :opacity="0.3"
+    ></loading>
     <div class="d-flex justify-content-center align-items-center vh-100">
       <form @submit.prevent="handleSubmit" class="bg-light shadow-lg" style="border-radius: 20px; width: 50rem;background: rgb(40,170,225); background: linear-gradient(180deg, rgba(40,170,225,1) 0%, rgba(206,235,248,1) 0%, rgba(222,241,250,1) 40%, rgba(255,255,255,1) 100%);">
         <div class="text-center bg-primary py-3 text-light mb-3" style="border-radius: 20px 20px 0 0;">
@@ -32,13 +39,26 @@
               </div>
               <div class="form-group">
                 <label for="inputPrice" style="font-size: 1.50rem;" class="font-weight-bold">Offered Price</label>
-                <input
+                <!-- <input
                   type="number"
                   class="form-control custom-input"
                   id="inputPrice"
                   placeholder="1000"
                   v-model="price"
-                />
+                  /> -->
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text custom-input" id="basic-addon3">Rp.</span>
+                </div>
+                <input 
+                  type="number" 
+                  class="form-control custom-input" 
+                  id="basic-url" 
+                  placeholder="10.000"
+                  v-model="price"
+                  aria-describedby="basic-addon3"
+                >
+              </div>
               </div>
             </div>
           </div>
@@ -58,6 +78,9 @@
 
 <script>
 import axios from '../config/api'
+import Loading from 'vue-loading-overlay';
+import 'vue-loading-overlay/dist/vue-loading.css';
+
 export default {
   name: 'AddTravelItem',
   data () {
@@ -65,13 +88,16 @@ export default {
       errors: [],
       file: null,
       name: '',
-      price: 10000,
+      price: null,
       quantity: 1,
       location: '',
       image: '',
       imageProgress: null,
       error: ''
     }
+  },
+  components: {
+    Loading
   },
   methods: {
     decreaseNumber () {
@@ -85,6 +111,7 @@ export default {
       this.file = file.file
     },
     handleSubmit () {
+      this.$store.commit('LOADING_START')
       this.errors = []
       const formData = new FormData()
       formData.set('name', this.name)
@@ -127,6 +154,7 @@ export default {
             })
           })
         })
+        .finally(() => this.$store.state.commit('LOADING_FINISH'))
     }
   }
 }
